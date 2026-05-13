@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<meta name="robots" content="noindex,nofollow">
+<title>Das LinkedIn IT Sales Playbook – JustClose</title>
+<meta name="description" content="Wie IT-Dienstleister durch LinkedIn planbar an Entscheider kommen, Verkaufszyklen halbieren und Umsatzziele übertreffen.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Das LinkedIn IT Sales Playbook – JustClose">
+<meta property="og:description" content="Wie IT-Dienstleister durch LinkedIn planbar an Entscheider kommen.">
+<meta property="og:type" content="website">
+
+<!-- Preconnect / Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   JustClose Funnel | Page 01: Lead Capture
+   Design-Tokens aus Website/funnel-linkedin-playbook/section-01-hero.html
+   Prefix: jcf- (JustClose Funnel)
+   ============================================================ */
+
+:root {
+  --jc-blue-50:  #E0F2FF;
+  --jc-blue-100: #BAE6FF;
+  --jc-blue-300: #7DD3FC;
+  --jc-blue-400: #38BDF8;
+  --jc-blue-500: #0EA5E9;
+  --jc-blue-700: #0369A1;
+  --jc-blue-900: #0C2A4A;
+
+  --jcf-bg: #000;
+  --jcf-bg-soft: #0a0a0a;
+  --jcf-fg: #fff;
+  --jcf-muted: rgba(255, 255, 255, 0.65);
+  --jcf-muted-2: rgba(255, 255, 255, 0.45);
+  --jcf-border: rgba(255, 255, 255, 0.10);
+  --jcf-border-strong: rgba(255, 255, 255, 0.18);
+  --jcf-card: rgba(255, 255, 255, 0.03);
+  --jcf-card-hover: rgba(255, 255, 255, 0.05);
+
+  --jcf-shadow-cta: 0 8px 32px rgba(56, 189, 248, 0.35);
+  --jcf-radius: 0.75rem;
+  --jcf-radius-lg: 1rem;
+}
+
+*,*::before,*::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--jcf-bg);
+  color: var(--jcf-fg);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+/* ===== Container ===== */
+.jcf-container { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; }
+.jcf-container--narrow { max-width: 42rem; }
+.jcf-container--wide   { max-width: 90rem; }
+
+/* ===== Logo / Header ===== */
+.jcf-header {
+  position: relative;
+  z-index: 3;
+  padding: 1.5rem 1.25rem 0;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  pointer-events: none;
+}
+.jcf-header > * { pointer-events: auto; }
+.jcf-logo {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  text-decoration: none;
+}
+.jcf-logo-img {
+  height: 2.25rem;
+  width: auto;
+  display: block;
+}
+@media (min-width: 768px)  { .jcf-logo-img { height: 2.5rem; } }
+@media (min-width: 1280px) { .jcf-logo-img { height: 2.75rem; } }
+/* Fallback Text-Logo (alt) — wird nur angezeigt wenn .jcf-logo-img fehlt */
+.jcf-logo-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+.jcf-logo-just { color: #fff; }
+.jcf-logo-close {
+  background: linear-gradient(135deg, var(--jc-blue-400), var(--jc-blue-500));
+  color: #fff;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.35);
+}
+.jcf-logo-tagline {
+  font-size: 0.7rem;
+  color: var(--jcf-muted);
+  letter-spacing: 0.04em;
+}
+
+/* ===== Hero ===== */
+.jcf-hero {
+  position: relative;
+  padding: 0 1.25rem clamp(1.5rem, 4vh, 3rem);
+  text-align: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+.jcf-hero .jcf-header { padding-bottom: clamp(1.5rem, 4vh, 2.75rem); }
+.jcf-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 35% at 50% 0%, rgba(56, 189, 248, 0.22), transparent 65%),
+    radial-gradient(ellipse 110% 60% at 50% 115%, rgba(14, 165, 233, 0.18), transparent 75%);
+  z-index: -2;
+  pointer-events: none;
+}
+.jcf-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 70% 50% at 50% 30%, #000 25%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 30%, #000 25%, transparent 75%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.jcf-subline {
+  display: inline-block;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.005em;
+  background-image: linear-gradient(to right, var(--jc-blue-400), #5BA8FF, var(--jc-blue-400));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: jcf-shimmer 5s linear infinite;
+}
+.jcf-important-heading {
+  font-size: clamp(1.5rem, 3.6vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.85rem;
+  background-image: linear-gradient(to right, var(--jc-blue-300), var(--jc-blue-100), var(--jc-blue-300));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: jcf-shimmer 5s linear infinite;
+}
+.jcf-headline {
+  font-size: clamp(1.6rem, 3.2vw, 2.7rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  max-width: 76rem;
+  margin: 0 auto 1rem;
+  text-wrap: balance;
+  background-image: linear-gradient(to bottom right, #fff 0%, #fff 55%, rgba(255, 255, 255, 0.55));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.jcf-hero-sub {
+  font-size: clamp(0.95rem, 1.4vw, 1.0625rem);
+  color: var(--jcf-muted);
+  max-width: 36rem;
+  margin: 0 auto 2rem;
+  line-height: 1.55;
+}
+
+/* ===== Hero Media (Mockup) ===== */
+.jcf-media {
+  position: relative;
+  margin: clamp(2rem, 5vh, 3.5rem) auto 0;
+  max-width: 32rem;
+}
+@media (min-width: 768px)  { .jcf-media { max-width: 42rem; } }
+@media (min-width: 1280px) { .jcf-media { max-width: 50rem; } }
+
+.jcf-media-glow {
+  position: absolute;
+  inset: -8% -5% -25%;
+  background: radial-gradient(ellipse 75% 55% at 50% 65%,
+    rgba(56, 189, 248, 0.45) 0%,
+    rgba(14, 165, 233, 0.22) 30%,
+    transparent 70%);
+  filter: blur(48px);
+  z-index: -1;
+  pointer-events: none;
+}
+.jcf-media img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--jcf-radius);
+  animation: jcf-float 7s ease-in-out infinite;
+}
+.jcf-media-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--jcf-radius-lg);
+  background:
+    linear-gradient(135deg, rgba(56, 189, 248, 0.06), rgba(56, 189, 248, 0)),
+    linear-gradient(160deg, #0b1a2a 0%, #050a14 100%);
+  border: 1px dashed rgba(125, 211, 252, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.9rem;
+  animation: jcf-float 7s ease-in-out infinite;
+}
+.jcf-media-placeholder svg { width: 32px; height: 32px; opacity: 0.5; }
+.jcf-media-placeholder em { font-style: italic; font-size: 0.75rem; opacity: 0.7; }
+
+/* ===== Form Card ===== */
+.jcf-form-card {
+  padding: clamp(1.25rem, 3vw, 2rem) 0 0;
+  margin: clamp(1.5rem, 4vh, 2.5rem) auto 0;
+  max-width: 36rem;
+  text-align: center;
+}
+.jcf-form-card form { text-align: left; }
+.jcf-form-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+  color: #fff;
+}
+.jcf-form-hint {
+  font-size: 1rem;
+  color: var(--jcf-fg);
+  margin: 0 0 1.5rem;
+  line-height: 1.5;
+  text-align: center;
+}
+.jcf-form-hint strong { color: #fff; font-weight: 700; }
+.jcf-form { display: grid; gap: 0.85rem; }
+.jcf-name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+@media (max-width: 480px) { .jcf-name-row { grid-template-columns: 1fr; } }
+.jcf-field { display: grid; gap: 0.35rem; }
+.jcf-label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--jcf-muted);
+  letter-spacing: 0.01em;
+}
+.jcf-input,
+.jcf-select {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--jcf-border-strong);
+  border-radius: 0.6rem;
+  color: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color .2s, background .2s, box-shadow .2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.jcf-input::placeholder { color: rgba(255,255,255,0.35); }
+.jcf-input:focus,
+.jcf-select:focus {
+  border-color: var(--jc-blue-400);
+  background: rgba(56, 189, 248, 0.05);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+.jcf-select {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23BAE6FF' stroke-width='1.5'><path d='M3 4.5L6 7.5L9 4.5'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+/* Phone group: country + number */
+.jcf-phone-row { display: grid; grid-template-columns: 9rem 1fr; gap: 0.5rem; }
+@media (max-width: 420px) { .jcf-phone-row { grid-template-columns: 8rem 1fr; } }
+
+.jcf-checkbox-row {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  font-size: 0.82rem;
+  color: var(--jcf-muted);
+  line-height: 1.4;
+  margin-top: 0.25rem;
+}
+.jcf-checkbox-row input {
+  margin-top: 0.15rem;
+  accent-color: var(--jc-blue-500);
+  width: 1rem; height: 1rem;
+  flex-shrink: 0;
+}
+.jcf-checkbox-row a { color: var(--jc-blue-300); text-decoration: underline; }
+
+/* ===== CTA Button — Huly Style (light pill, blue inner glow, hover halo) ===== */
+.jcf-cta-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.75rem;
+}
+.jcf-cta-wrap {
+  position: relative;
+  display: inline-flex;
+  isolation: isolate;
+  width: 100%;
+  max-width: 30rem;
+}
+.jcf-cta-wrap__halo {
+  position: absolute;
+  z-index: -1;
+  top: 50%; left: 50%;
+  width: min(120%, 460px);
+  height: 280%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  will-change: opacity;
+  background: radial-gradient(
+    45% 45% at 50% 50%,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(186, 230, 255, 0.28) 14%,
+    rgba(125, 211, 252, 0.22) 30%,
+    rgba(56, 189, 248, 0.14) 50%,
+    rgba(14, 165, 233, 0.06) 70%,
+    transparent 100%
+  );
+  filter: blur(28px);
+  opacity: 0.55;
+  transition: opacity .35s ease-out;
+}
+.jcf-cta-wrap:hover .jcf-cta-wrap__halo { opacity: 1; }
+
+.jcf-cta {
+  position: relative;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.95rem 1.6rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  color: var(--jc-blue-900);
+  background: #ECF5FB;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 9999px;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  white-space: normal;
+  overflow: hidden;
+  transition: transform .15s ease, background .25s, border-color .25s;
+}
+@media (min-width: 768px) { .jcf-cta { padding: 1.05rem 2rem; font-size: 0.95rem; } }
+.jcf-cta:hover { transform: translateY(-1px); background: #fff; border-color: rgba(255,255,255,0.9); }
+.jcf-cta:active { transform: translateY(0); }
+.jcf-cta:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+.jcf-cta__glow {
+  position: absolute;
+  z-index: -1;
+  top: 50%; left: 50%;
+  width: 220px; height: 121px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.jcf-cta__glow::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 121px; height: 121px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #FFFFFF 3.5%,
+    #BAE6FF 26.5%,
+    #9CECFC 37.5%,
+    rgba(77, 151, 254, 0.50) 49%,
+    rgba(3, 105, 161, 0) 92.5%
+  );
+}
+.jcf-cta__glow::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 220px; height: 103px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    48% 50% at 50% 50%,
+    #FFFFFF 29%,
+    #E0F2FF 48.5%,
+    #BAE6FF 60.71%,
+    rgba(186, 230, 255, 0) 100%
+  );
+  filter: blur(6px);
+}
+.jcf-cta__arrow {
+  width: 17px; height: 9px;
+  flex-shrink: 0;
+  color: var(--jc-blue-900);
+}
+.jcf-cta__sub {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--jcf-muted);
+  letter-spacing: 0;
+}
+.jcf-cta-spinner {
+  display: none;
+  width: 1.1rem; height: 1.1rem;
+  border: 2px solid rgba(12, 42, 74, 0.25);
+  border-top-color: var(--jc-blue-900);
+  border-radius: 50%;
+  animation: jcf-spin 0.6s linear infinite;
+}
+.jcf-cta.is-loading .jcf-cta-spinner { display: inline-block; }
+.jcf-cta.is-loading .jcf-cta__label,
+.jcf-cta.is-loading .jcf-cta__arrow,
+.jcf-cta.is-loading .jcf-cta__glow { display: none; }
+
+/* ===== Form Error / Success ===== */
+.jcf-form-error,
+.jcf-form-success {
+  display: none;
+  margin-top: 0.85rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+.jcf-form-error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+.jcf-form-success {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #86efac;
+}
+
+/* ===== Trust Strip ===== */
+.jcf-trust {
+  position: relative;
+  padding: clamp(1.5rem, 4vh, 2.75rem) 0 clamp(1.5rem, 4vh, 2.5rem);
+  margin-top: 0;
+  text-align: center;
+  isolation: isolate;
+}
+/* Durchgehender Cyan-Schleier mit weichem linearen Auslauf nach oben & unten —
+   bridge zwischen Hero und Trust + Trust und nächster Sektion. */
+.jcf-trust::before {
+  content: "";
+  position: absolute;
+  top: -16rem; left: 0; right: 0; bottom: -16rem;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(56, 189, 248, 0.04) 18%,
+    rgba(56, 189, 248, 0.10) 50%,
+    rgba(56, 189, 248, 0.04) 82%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+.jcf-trust-label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--jcf-muted-2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+}
+.jcf-trust-track {
+  display: flex;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.jcf-trust-row {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  flex-shrink: 0;
+  animation: jcf-marquee 40s linear infinite;
+  padding-right: 2.5rem;
+}
+@media (min-width: 768px)  { .jcf-trust-row { gap: 3.5rem; padding-right: 3.5rem; } }
+@media (min-width: 1280px) { .jcf-trust-row { gap: 4.5rem; padding-right: 4.5rem; } }
+
+.jcf-trust-logo {
+  height: 2rem;
+  width: auto;
+  opacity: 0.6;
+  filter: grayscale(100%) brightness(1.6);
+  transition: opacity .2s, filter .2s;
+}
+@media (min-width: 768px)  { .jcf-trust-logo { height: 2.5rem; } }
+@media (min-width: 1280px) { .jcf-trust-logo { height: 2.75rem; } }
+.jcf-trust-logo:hover { opacity: 1; filter: grayscale(0%) brightness(1); }
+.jcf-trust-logo--placeholder {
+  height: 2rem;
+  padding: 0 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed rgba(255,255,255,0.2);
+  border-radius: 0.4rem;
+  color: rgba(255,255,255,0.4);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+@media (min-width: 768px)  { .jcf-trust-logo--placeholder { height: 2.5rem; padding: 0 1.5rem; font-size: 0.85rem; } }
+@media (min-width: 1280px) { .jcf-trust-logo--placeholder { height: 2.75rem; padding: 0 1.75rem; font-size: 0.9rem; } }
+
+/* ===== Team Image Section ===== */
+.jcf-team {
+  padding: 0 1.25rem;
+  margin-top: clamp(2rem, 5vh, 3rem);
+}
+.jcf-team-inner {
+  max-width: 56rem;
+  margin: 0 auto;
+  position: relative;
+}
+@media (min-width: 1280px) { .jcf-team-inner { max-width: 60rem; } }
+
+.jcf-team img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--jcf-radius-lg);
+  display: block;
+  object-fit: cover;
+}
+.jcf-team-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--jcf-radius-lg);
+  background: linear-gradient(160deg, #0b1a2a 0%, #050a14 100%);
+  border: 1px dashed rgba(125, 211, 252, 0.25);
+}
+
+/* ===== Bullet Section (cleaner, no cards) ===== */
+.jcf-bullets {
+  padding: clamp(2.5rem, 6vh, 4rem) 1.25rem clamp(1.5rem, 3vh, 2.25rem);
+}
+.jcf-bullets-title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin: 0 0 clamp(2rem, 4vh, 3rem);
+  background-image: linear-gradient(to right, var(--jc-blue-300), var(--jc-blue-100), var(--jc-blue-300));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: jcf-shimmer 5s linear infinite;
+}
+.jcf-section-title {
+  font-size: clamp(1.4rem, 3.4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin: 0 0 clamp(2rem, 4vh, 2.75rem);
+  background-image: linear-gradient(to right, var(--jc-blue-400), #5BA8FF, var(--jc-blue-400));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: jcf-shimmer 5s linear infinite;
+  text-wrap: balance;
+}
+.jcf-bullet-grid {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 80rem;
+  margin: 0 auto;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .jcf-bullet-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+}
+@media (min-width: 1280px) {
+  .jcf-bullet-grid { gap: 1.5rem; max-width: 84rem; }
+}
+.jcf-bullet { text-align: left; }
+.jcf-bullet-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 0.55rem;
+  color: #fff;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.jcf-bullet-text {
+  font-size: 0.95rem;
+  color: var(--jcf-muted);
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* ===== Final CTA Section ===== */
+.jcf-final-cta {
+  padding: clamp(1.25rem, 3vh, 2rem) 1.25rem clamp(3rem, 8vh, 5rem);
+  text-align: center;
+  position: relative;
+  isolation: isolate;
+}
+.jcf-final-cta .jcf-section-title { margin-bottom: clamp(0.75rem, 2vh, 1.25rem); }
+.jcf-final-cta .jcf-form-card     { margin-top: clamp(0.5rem, 1.5vh, 1rem); padding-top: 0; }
+.jcf-final-cta .jcf-important-heading { margin-bottom: 0.6rem; }
+.jcf-final-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(56, 189, 248, 0.12), transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ===== Footer ===== */
+.jcf-footer {
+  padding: 2rem 1.25rem;
+  text-align: center;
+  border-top: 1px solid var(--jcf-border);
+  font-size: 0.78rem;
+  color: var(--jcf-muted-2);
+}
+.jcf-footer a { color: var(--jcf-muted); margin: 0 0.6rem; }
+.jcf-footer a:hover { color: var(--jc-blue-300); }
+
+/* ===== Animations ===== */
+@keyframes jcf-shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: 0% center; }
+}
+@keyframes jcf-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+@keyframes jcf-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes jcf-spin { to { transform: rotate(360deg); } }
+
+/* ===== Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ===== Desktop ===== */
+@media (min-width: 768px) {
+  .jcf-hero { padding-top: clamp(3rem, 8vh, 5rem); }
+  .jcf-bullet-list { gap: 1.25rem; }
+  .jcf-bullet { padding: 1.5rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============= HERO (mit integriertem Header für nahtlosen Glow) ============= -->
+<section class="jcf-hero">
+  <header class="jcf-header">
+    <a href="/" class="jcf-logo" aria-label="JustClose – Selling IT smarter">
+      <img class="jcf-logo-img"
+           src="https://lh3.googleusercontent.com/d/1cjjKhcdZ3g-4t3pzomYENfLIopSNpy6m=w400"
+           alt="JustClose – Selling IT smarter"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
+      <span class="jcf-logo-mark" style="display:none;">
+        <span class="jcf-logo-just">JUST</span><span class="jcf-logo-close">CLOSE</span>
+      </span>
+    </a>
+  </header>
+
+  <div class="jcf-container">
+    <div class="jcf-subline">Das LinkedIn IT Sales Playbook</div>
+    <h1 class="jcf-headline">
+      Wie IT-Dienstleister durch LinkedIn planbar an Entscheider kommen, Verkaufszyklen halbieren und Umsatzziele übertreffen.
+    </h1>
+    <p class="jcf-hero-sub">
+      Validiert mit IT-Dienstleistern und Tech-Start-ups im DACH-Raum. Trag dich ein und lade dir das Playbook in unter 30 Sekunden.
+    </p>
+
+    <!-- Mockup-Bild (Buch-Mockup via Google Drive) -->
+    <div class="jcf-media">
+      <div class="jcf-media-glow"></div>
+      <img src="https://lh3.googleusercontent.com/d/1gS4mA26wkS7SswWZUmRZmmFChUEifx5c=w2800"
+           alt="LinkedIn IT Sales Playbook – Mockup"
+           loading="eager" fetchpriority="high"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="jcf-media-placeholder" aria-hidden="true" style="display:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="9" cy="9" r="2"/>
+          <path d="M21 15l-5-5L5 21"/>
+        </svg>
+        <span>Playbook-Mockup</span>
+        <em>Bild konnte nicht geladen werden</em>
+      </div>
+    </div>
+
+    <!-- ============= FORM ============= -->
+    <div class="jcf-form-card">
+      <h2 class="jcf-important-heading">Wichtig:</h2>
+      <p class="jcf-form-hint">Wir schicken es dir direkt <strong>per SMS</strong> zu.<br>Trage deshalb deine <strong>richtige Handynummer</strong> ein.</p>
+
+      <form class="jcf-form" id="jcfLeadForm" novalidate>
+        <div class="jcf-name-row">
+          <div class="jcf-field">
+            <input class="jcf-input" type="text" id="jcfFirstName" name="firstName" autocomplete="given-name" required placeholder="Vorname" aria-label="Vorname">
+          </div>
+          <div class="jcf-field">
+            <input class="jcf-input" type="text" id="jcfLastName" name="lastName" autocomplete="family-name" required placeholder="Nachname" aria-label="Nachname">
+          </div>
+        </div>
+
+        <div class="jcf-field">
+          <div class="jcf-phone-row">
+            <select class="jcf-select" id="jcfCountry" name="phoneCountry" required aria-label="Ländervorwahl">
+              <option value="+49" selected>🇩🇪 +49</option>
+              <option value="+43">🇦🇹 +43</option>
+              <option value="+41">🇨🇭 +41</option>
+              <option value="+31">🇳🇱 +31</option>
+              <option value="+33">🇫🇷 +33</option>
+              <option value="+44">🇬🇧 +44</option>
+              <option value="+1">🇺🇸 +1</option>
+            </select>
+            <input class="jcf-input" type="tel" id="jcfPhone" name="phone" autocomplete="tel" required placeholder="Deine Handynummer" inputmode="tel" aria-label="Handynummer">
+          </div>
+        </div>
+
+        <div class="jcf-field">
+          <input class="jcf-input" type="email" id="jcfEmail" name="email" autocomplete="email" required placeholder="Deine E-Mail-Adresse" aria-label="E-Mail-Adresse">
+        </div>
+
+        <label class="jcf-checkbox-row">
+          <input type="checkbox" id="jcfConsent" name="consent" required>
+          <span>Ich akzeptiere die <a href="https://justclose.de/datenschutzerklaerung/" target="_blank" rel="noopener">Datenschutzbestimmungen</a></span>
+        </label>
+
+        <!-- Hidden tracking -->
+        <input type="hidden" name="leadSource" value="linkedin-playbook-landing">
+        <input type="hidden" name="utmSource"   id="jcfUtmSource">
+        <input type="hidden" name="utmMedium"   id="jcfUtmMedium">
+        <input type="hidden" name="utmCampaign" id="jcfUtmCampaign">
+        <input type="hidden" name="utmContent"  id="jcfUtmContent">
+        <input type="hidden" name="utmTerm"     id="jcfUtmTerm">
+        <input type="hidden" name="referrer"    id="jcfReferrer">
+        <input type="hidden" name="pageUrl"     id="jcfPageUrl">
+
+        <div class="jcf-cta-row">
+          <div class="jcf-cta-wrap">
+            <span class="jcf-cta-wrap__halo"></span>
+            <button type="submit" class="jcf-cta" id="jcfSubmit">
+              <span class="jcf-cta-spinner" aria-hidden="true"></span>
+              <span class="jcf-cta__label">Playbook jetzt anfordern</span>
+              <svg class="jcf-cta__arrow" viewBox="0 0 17 9" fill="none" aria-hidden="true">
+                <path d="M0.5 4.5h14M11 1l3.5 3.5L11 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="jcf-cta__glow" aria-hidden="true"></span>
+            </button>
+          </div>
+          <p class="jcf-cta__sub">Direkter Downloadvorgang nach Eintrag</p>
+        </div>
+
+        <div class="jcf-form-error" id="jcfFormError" role="alert"></div>
+        <div class="jcf-form-success" id="jcfFormSuccess" role="status">Erfolgreich! Du wirst weitergeleitet...</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============= TRUST STRIP ============= -->
+<section class="jcf-trust">
+  <p class="jcf-trust-label" style="font-style: italic; text-transform: none; font-size: 0.95rem; letter-spacing: 0; color: var(--jcf-muted);">
+    Validiert mit IT-Dienstleistern und Tech-Start-ups im DACH-Raum.
+  </p>
+  <div class="jcf-trust-track">
+    <div class="jcf-trust-row" id="jcfTrustRow">
+      <!-- Logos via Drive (lh3.googleusercontent.com); Reihenfolge laut Drive-Link-Order von Leon. -->
+      <!-- Falls falsch zugeordnet: einfach FILEID-Block tauschen. -->
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1hPlJN6mM-IlQzPfHitxJSVk-WnfeXoXc=w400" alt="Logo 1" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1Ht9HCJKf4nkHWVxuJweC6ttaaQe0Ike5=w400" alt="Logo 2" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1co4htoDxGjJLWvYRcq8tnau0-DIm6Xvr=w400" alt="Logo 3" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1GH0GVLCf8G-qmWwjFtAiv1_Ii5MPLMkO=w400" alt="Logo 4" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/17Bi8LEvvLXFXaRR265GZDCmCZNfjyRN7=w400" alt="Logo 5" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/18MXyuV_aXOf3QjskV8IfqVwsUEd8SRZy=w400" alt="Logo 6" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1lxbbdFiM02n2deo7c0jhHhVKzUQeS1Ez=w400" alt="Logo 7" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1hKMHYYL8Bj_8bhepipRHmTlStcne7PCX=w400" alt="Logo 8" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1PZb8XC-LxBMqqR6rRv55bpTlToGK3kuv=w400" alt="Logo 9" loading="lazy">
+      <!-- Duplikat für nahtloses Marquee-Loop -->
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1hPlJN6mM-IlQzPfHitxJSVk-WnfeXoXc=w400" alt="" aria-hidden="true" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1Ht9HCJKf4nkHWVxuJweC6ttaaQe0Ike5=w400" alt="" aria-hidden="true" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1co4htoDxGjJLWvYRcq8tnau0-DIm6Xvr=w400" alt="" aria-hidden="true" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1GH0GVLCf8G-qmWwjFtAiv1_Ii5MPLMkO=w400" alt="" aria-hidden="true" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/17Bi8LEvvLXFXaRR265GZDCmCZNfjyRN7=w400" alt="" aria-hidden="true" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/18MXyuV_aXOf3QjskV8IfqVwsUEd8SRZy=w400" alt="" aria-hidden="true" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1lxbbdFiM02n2deo7c0jhHhVKzUQeS1Ez=w400" alt="" aria-hidden="true" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1hKMHYYL8Bj_8bhepipRHmTlStcne7PCX=w400" alt="" aria-hidden="true" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1PZb8XC-LxBMqqR6rRv55bpTlToGK3kuv=w400" alt="" aria-hidden="true" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ============= TEAM-FOTO ============= -->
+<section class="jcf-team">
+  <div class="jcf-team-inner">
+    <img src="https://lh3.googleusercontent.com/d/1RFdbYuieA7GDUHGnpv3qHu-CcpErkVGy=w2000"
+         alt="JustClose Team im Beratungsgespräch"
+         loading="lazy"
+         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+    <div class="jcf-team-placeholder" aria-hidden="true" style="display:none;"></div>
+  </div>
+</section>
+
+<!-- ============= BULLETS ============= -->
+<section class="jcf-bullets">
+  <div class="jcf-container">
+    <h2 class="jcf-bullets-title">Worum es geht...</h2>
+    <div class="jcf-bullet-grid">
+
+      <div class="jcf-bullet">
+        <h3 class="jcf-bullet-title">Das Posting-System</h3>
+        <p class="jcf-bullet-text">3 Post-Typen + 1 Wochenstruktur, mit denen IT-Sales auf LinkedIn überhaupt erst sichtbar wird.</p>
+      </div>
+
+      <div class="jcf-bullet">
+        <h3 class="jcf-bullet-title">Die Bridge-Mechanik:</h3>
+        <p class="jcf-bullet-text">Wie aus Sichtbarkeit echte Termine werden, ohne dass es nach Pitch-Bot aussieht.</p>
+      </div>
+
+      <div class="jcf-bullet">
+        <h3 class="jcf-bullet-title">Die gemeinsame Sales-Sprache:</h3>
+        <p class="jcf-bullet-text">Eine Vorlage, die dein gesamtes Team gleichschaltet, statt 8 unterschiedliche Pitches zu produzieren.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============= FINAL CTA (zweite Form) ============= -->
+<section class="jcf-final-cta">
+  <div class="jcf-container">
+
+    <h2 class="jcf-section-title">Jetzt das LinkedIn IT Sales Playbook herunterladen</h2>
+
+    <div class="jcf-form-card">
+      <h3 class="jcf-important-heading" style="text-align:center;">Wichtig:</h3>
+      <p class="jcf-form-hint">Wir schicken es dir direkt <strong>per SMS</strong> zu.<br>Trage deshalb deine <strong>richtige Handynummer</strong> ein.</p>
+
+      <form class="jcf-form" id="jcfLeadForm2" novalidate>
+        <div class="jcf-name-row">
+          <div class="jcf-field">
+            <input class="jcf-input" type="text" name="firstName" autocomplete="given-name" required placeholder="Vorname" aria-label="Vorname">
+          </div>
+          <div class="jcf-field">
+            <input class="jcf-input" type="text" name="lastName" autocomplete="family-name" required placeholder="Nachname" aria-label="Nachname">
+          </div>
+        </div>
+
+        <div class="jcf-field">
+          <div class="jcf-phone-row">
+            <select class="jcf-select" name="phoneCountry" required aria-label="Ländervorwahl">
+              <option value="+49" selected>🇩🇪 +49</option>
+              <option value="+43">🇦🇹 +43</option>
+              <option value="+41">🇨🇭 +41</option>
+              <option value="+31">🇳🇱 +31</option>
+              <option value="+33">🇫🇷 +33</option>
+              <option value="+44">🇬🇧 +44</option>
+              <option value="+1">🇺🇸 +1</option>
+            </select>
+            <input class="jcf-input" type="tel" name="phone" autocomplete="tel" required placeholder="Deine Handynummer" inputmode="tel" aria-label="Handynummer">
+          </div>
+        </div>
+
+        <div class="jcf-field">
+          <input class="jcf-input" type="email" name="email" autocomplete="email" required placeholder="Deine Mail" aria-label="E-Mail-Adresse">
+        </div>
+
+        <label class="jcf-checkbox-row">
+          <input type="checkbox" name="consent" required>
+          <span>Ich akzeptiere die <a href="https://justclose.de/datenschutzerklaerung/" target="_blank" rel="noopener">Datenschutzbestimmungen</a></span>
+        </label>
+
+        <input type="hidden" name="leadSource" value="linkedin-playbook-landing-bottom">
+        <input type="hidden" name="formPosition" value="bottom">
+
+        <div class="jcf-cta-row">
+          <div class="jcf-cta-wrap">
+            <span class="jcf-cta-wrap__halo"></span>
+            <button type="submit" class="jcf-cta">
+              <span class="jcf-cta-spinner" aria-hidden="true"></span>
+              <span class="jcf-cta__label">Jetzt dein IT-Playbook herunterladen</span>
+              <svg class="jcf-cta__arrow" viewBox="0 0 17 9" fill="none" aria-hidden="true">
+                <path d="M0.5 4.5h14M11 1l3.5 3.5L11 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="jcf-cta__glow" aria-hidden="true"></span>
+            </button>
+          </div>
+          <p class="jcf-cta__sub">Direkter Downloadvorgang nach Eintrag</p>
+        </div>
+
+        <div class="jcf-form-error" role="alert"></div>
+        <div class="jcf-form-success" role="status">Erfolgreich! Du wirst weitergeleitet...</div>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============= FOOTER ============= -->
+<footer class="jcf-footer">
+  <p>&copy; <span id="jcfYear"></span> JustClose · <a href="https://justclose.de/impressum/" target="_blank" rel="noopener">Impressum</a> · <a href="https://justclose.de/datenschutzerklaerung/" target="_blank" rel="noopener">Datenschutz</a></p>
+</footer>
+
+<!-- ============= JS: Form Submit + UTM ============= -->
+<script>
+(function(){
+  // Year
+  var yearEl = document.getElementById('jcfYear');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // UTM + Referrer Capture
+  var p = new URLSearchParams(window.location.search);
+  var setVal = function(id, v){ var el = document.getElementById(id); if (el && v) el.value = v; };
+  setVal('jcfUtmSource',   p.get('utm_source'));
+  setVal('jcfUtmMedium',   p.get('utm_medium'));
+  setVal('jcfUtmCampaign', p.get('utm_campaign'));
+  setVal('jcfUtmContent',  p.get('utm_content'));
+  setVal('jcfUtmTerm',     p.get('utm_term'));
+  setVal('jcfReferrer',    document.referrer || '');
+  setVal('jcfPageUrl',     window.location.href);
+
+  // ============================================================
+  // CONFIG — hier deinen n8n / Make / Zapier Webhook eintragen.
+  // Der Webhook leitet die Daten dann in Close CRM (POST /lead) +
+  // optional weitere Ziele (SMS-Provider, Slack, Sheet).
+  // ============================================================
+  var WEBHOOK_URL  = 'https://n8n.justclose.de/webhook/linkedin-playbook-lead';
+  var REDIRECT_URL = '/linkedin-playbook-download.html'; // bzw. './page-02-oto-download.html'
+
+  // Beide Forms (oben + unten) mit gleichem Handler verdrahten
+  var forms = document.querySelectorAll('#jcfLeadForm, #jcfLeadForm2');
+
+  forms.forEach(function(form){
+    var btn   = form.querySelector('button[type="submit"]');
+    var errEl = form.querySelector('.jcf-form-error');
+    var okEl  = form.querySelector('.jcf-form-success');
+
+    function showError(msg){
+      if (!errEl) return;
+      errEl.textContent = msg;
+      errEl.style.display = 'block';
+      if (okEl) okEl.style.display = 'none';
+    }
+    function hideError(){ if (errEl) errEl.style.display = 'none'; }
+
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      hideError();
+
+      if (!form.checkValidity()){ form.reportValidity(); return; }
+
+      var fd = new FormData(form);
+      var payload = {};
+      fd.forEach(function(v, k){ payload[k] = v; });
+      payload.consent     = form.querySelector('input[name="consent"]').checked;
+      payload.fullPhone   = (payload.phoneCountry || '') + ' ' + (payload.phone || '');
+      payload.submittedAt = new Date().toISOString();
+      payload.userAgent   = navigator.userAgent;
+      payload.locale      = navigator.language;
+      // UTM/Referrer aus Page-Level-Hidden-Inputs ziehen (nur Form 1 hat sie nativ)
+      ['utmSource','utmMedium','utmCampaign','utmContent','utmTerm','referrer','pageUrl'].forEach(function(k){
+        if (!payload[k]) {
+          var hidden = document.querySelector('#jcfLeadForm [name="' + k + '"]');
+          if (hidden) payload[k] = hidden.value;
+        }
+      });
+
+      if (btn) { btn.classList.add('is-loading'); btn.disabled = true; }
+
+      try {
+        var res = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          keepalive: true
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+
+        if (okEl) okEl.style.display = 'block';
+        try { sessionStorage.setItem('jcf_lead', JSON.stringify(payload)); } catch(_){}
+        window.location.href = REDIRECT_URL;
+      } catch(err){
+        console.error('[JCF] Submit failed', err);
+        showError('Hoppla, das hat nicht geklappt. Bitte probier es nochmal oder schreib uns kurz auf info@justclose.de.');
+        if (btn) { btn.classList.remove('is-loading'); btn.disabled = false; }
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

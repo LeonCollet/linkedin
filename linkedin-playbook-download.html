@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<meta name="robots" content="noindex,nofollow">
+<title>Stopp! Dein IT-Sales Kickstarter Bundle wartet | JustClose</title>
+<meta name="description" content="Lass Deine LinkedIn-Strategie für erste Anfragen gratis von unseren Senior-Sales-Strategen aufbauen. Exklusiv für IT-Dienstleister mit 5 bis 60 Mitarbeitern.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   JustClose Funnel | Page 02: OTO – IT-Sales Kickstarter Bundle
+   Design-Tokens: identisch zu page-01-lead-capture.html
+   ============================================================ */
+
+:root {
+  --jc-blue-50:  #E0F2FF;
+  --jc-blue-100: #BAE6FF;
+  --jc-blue-300: #7DD3FC;
+  --jc-blue-400: #38BDF8;
+  --jc-blue-500: #0EA5E9;
+  --jc-blue-700: #0369A1;
+  --jc-blue-900: #0C2A4A;
+  --jc-orange:   #FB923C;
+  --jc-red:      #EF4444;
+
+  --jcf-bg: #000;
+  --jcf-fg: #fff;
+  --jcf-muted: rgba(255, 255, 255, 0.65);
+  --jcf-muted-2: rgba(255, 255, 255, 0.45);
+  --jcf-border: rgba(255, 255, 255, 0.10);
+  --jcf-border-strong: rgba(255, 255, 255, 0.18);
+  --jcf-card: rgba(255, 255, 255, 0.03);
+
+  --jcf-shadow-cta: 0 8px 32px rgba(56, 189, 248, 0.35);
+  --jcf-radius: 0.75rem;
+  --jcf-radius-lg: 1rem;
+}
+
+*,*::before,*::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--jcf-bg);
+  color: var(--jcf-fg);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+.jcf-container { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; }
+.jcf-container--narrow { max-width: 44rem; }
+.jcf-container--wide   { max-width: 90rem; }
+
+/* ===== Header (transparent über Hero-Glow) ===== */
+.jcf-header {
+  position: relative;
+  z-index: 3;
+  padding: 1.5rem 1.25rem 0;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  pointer-events: none;
+}
+.jcf-header > * { pointer-events: auto; }
+.jcf-logo { display: inline-flex; flex-direction: column; align-items: center; gap: 0.15rem; text-decoration: none; }
+.jcf-logo-img { height: 2.25rem; width: auto; display: block; }
+@media (min-width: 768px)  { .jcf-logo-img { height: 2.5rem; } }
+@media (min-width: 1280px) { .jcf-logo-img { height: 2.75rem; } }
+.jcf-logo-mark { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; letter-spacing: 0.06em; font-size: 1.05rem; line-height: 1; }
+.jcf-logo-just { color: #fff; }
+.jcf-logo-close { background: linear-gradient(135deg, var(--jc-blue-400), var(--jc-blue-500)); color: #fff; padding: 0.3rem 0.8rem; border-radius: 9999px; box-shadow: 0 0 24px rgba(56, 189, 248, 0.35); }
+
+/* ===== Hero ===== */
+.jcf-hero {
+  position: relative;
+  padding: 0 1.25rem clamp(1.5rem, 4vh, 3rem);
+  text-align: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+.jcf-hero .jcf-header { padding-bottom: clamp(1rem, 3vh, 2rem); }
+.jcf-hero::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 35% at 50% 0%, rgba(56, 189, 248, 0.22), transparent 65%),
+    radial-gradient(ellipse 110% 60% at 50% 115%, rgba(14, 165, 233, 0.18), transparent 75%);
+  z-index: -2;
+  pointer-events: none;
+}
+.jcf-hero::after {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 70% 50% at 50% 30%, #000 25%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 30%, #000 25%, transparent 75%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ===== Hero Content ===== */
+.jcf-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  color: var(--jc-blue-100);
+  text-decoration: none;
+  margin-bottom: 1.25rem;
+  background: rgba(56, 189, 248, 0.05);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: jcf-glow-pulse 3s ease-in-out infinite;
+  transition: color .2s, transform .2s, background .2s, border-color .2s;
+}
+.jcf-back-link:hover {
+  color: #fff;
+  transform: translateY(-1px);
+  background: rgba(56, 189, 248, 0.10);
+  border-color: rgba(56, 189, 248, 0.55);
+}
+.jcf-back-link svg { width: 0.85rem; height: 0.85rem; flex-shrink: 0; }
+@keyframes jcf-glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0), 0 0 12px rgba(56, 189, 248, 0.18); }
+  50%      { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0), 0 0 22px rgba(56, 189, 248, 0.35); }
+}
+
+.jcf-hook {
+  margin: 0 0 1rem;
+  font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--jcf-fg);
+}
+.jcf-hook strong {
+  color: var(--jc-orange);
+  font-weight: 700;
+}
+
+.jcf-headline {
+  font-size: clamp(1.6rem, 3.2vw, 2.7rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  max-width: 60rem;
+  margin: 0 auto 0.5rem;
+  text-wrap: balance;
+  background-image: linear-gradient(to bottom right, #fff 0%, #fff 55%, rgba(255, 255, 255, 0.55));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ===== Hero Media ===== */
+.jcf-media {
+  position: relative;
+  margin: clamp(0.5rem, 1.5vh, 1rem) auto 0;
+  max-width: 36rem;
+}
+@media (min-width: 768px)  { .jcf-media { max-width: 50rem; } }
+@media (min-width: 1280px) { .jcf-media { max-width: 60rem; } }
+
+.jcf-media-glow {
+  position: absolute;
+  inset: -8% -5% -25%;
+  background: radial-gradient(ellipse 75% 55% at 50% 65%,
+    rgba(56, 189, 248, 0.45) 0%, rgba(14, 165, 233, 0.22) 30%, transparent 70%);
+  filter: blur(48px);
+  z-index: -1;
+  pointer-events: none;
+}
+.jcf-media img {
+  width: 100%; height: auto;
+  border-radius: var(--jcf-radius);
+  display: block;
+}
+
+/* ===== CTA Button — Huly Style (light pill, blue inner glow, hover halo) ===== */
+.jcf-cta-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  margin: clamp(1.5rem, 3vh, 2rem) auto;
+}
+.jcf-hero .jcf-cta-row { margin: clamp(0.75rem, 2vh, 1.25rem) auto 0; }
+
+.jcf-cta-wrap {
+  position: relative;
+  display: inline-flex;
+  isolation: isolate;
+  width: 100%;
+  max-width: 30rem;
+}
+.jcf-cta-wrap__halo {
+  position: absolute;
+  z-index: -1;
+  top: 50%; left: 50%;
+  width: min(120%, 460px);
+  height: 280%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  will-change: opacity;
+  background: radial-gradient(
+    45% 45% at 50% 50%,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(186, 230, 255, 0.28) 14%,
+    rgba(125, 211, 252, 0.22) 30%,
+    rgba(56, 189, 248, 0.14) 50%,
+    rgba(14, 165, 233, 0.06) 70%,
+    transparent 100%
+  );
+  filter: blur(28px);
+  opacity: 0.55;
+  transition: opacity .35s ease-out;
+}
+.jcf-cta-wrap:hover .jcf-cta-wrap__halo { opacity: 1; }
+.jcf-cta-wrap.is-pulse .jcf-cta-wrap__halo { animation: jcf-halo-pulse 3s ease-in-out infinite; }
+@keyframes jcf-halo-pulse {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 0.85; }
+}
+
+.jcf-cta {
+  position: relative;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.95rem 1.6rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  color: var(--jc-blue-900);
+  background: #ECF5FB;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 9999px;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  white-space: normal;
+  overflow: hidden;
+  transition: transform .15s ease, background .25s, border-color .25s;
+}
+@media (min-width: 768px) { .jcf-cta { padding: 1.05rem 2rem; font-size: 0.95rem; } }
+.jcf-cta:hover { transform: translateY(-1px); background: #fff; border-color: rgba(255,255,255,0.9); }
+.jcf-cta:active { transform: translateY(0); }
+
+.jcf-cta__glow {
+  position: absolute;
+  z-index: -1;
+  top: 50%; left: 50%;
+  width: 220px; height: 121px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.jcf-cta__glow::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 121px; height: 121px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #FFFFFF 3.5%,
+    #BAE6FF 26.5%,
+    #9CECFC 37.5%,
+    rgba(77, 151, 254, 0.50) 49%,
+    rgba(3, 105, 161, 0) 92.5%
+  );
+}
+.jcf-cta__glow::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 220px; height: 103px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    48% 50% at 50% 50%,
+    #FFFFFF 29%,
+    #E0F2FF 48.5%,
+    #BAE6FF 60.71%,
+    rgba(186, 230, 255, 0) 100%
+  );
+  filter: blur(6px);
+}
+.jcf-cta__arrow {
+  width: 17px; height: 9px;
+  flex-shrink: 0;
+  color: var(--jc-blue-900);
+}
+.jcf-cta__sub {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--jcf-muted);
+  letter-spacing: 0;
+  text-align: center;
+}
+
+/* ===== Trust Strip ===== */
+.jcf-trust {
+  position: relative;
+  padding: clamp(0.75rem, 2vh, 1.5rem) 0 clamp(1.5rem, 4vh, 2.5rem);
+  text-align: center;
+  isolation: isolate;
+}
+/* Ein durchgehender Cyan-Schleier über die ganze Trust-Section + Bridge zur nächsten —
+   ein einziges Gradient mit weichem linearen Auslauf nach oben & unten,
+   damit kein „blauer Streifen" mit harten Kanten entsteht. */
+.jcf-trust::before {
+  content: "";
+  position: absolute;
+  top: -16rem; left: 0; right: 0; bottom: -16rem;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(56, 189, 248, 0.04) 20%,
+    rgba(56, 189, 248, 0.10) 50%,
+    rgba(56, 189, 248, 0.04) 80%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+.jcf-trust-label {
+  font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+  font-weight: 500;
+  color: var(--jcf-fg);
+  margin: 0 auto clamp(1rem, 2.5vh, 1.5rem);
+  max-width: 40rem;
+  letter-spacing: -0.005em;
+}
+/* Marquee: 2 identische Rows nebeneinander, jeweils -100% animiert = seamless loop */
+.jcf-trust-track {
+  display: flex;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.jcf-trust-row {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 2.5rem;
+  padding-right: 2.5rem; /* gleicher Abstand zur nächsten Row, damit Übergang seamless ist */
+  animation: jcf-marquee 40s linear infinite;
+  will-change: transform;
+}
+@media (min-width: 768px)  { .jcf-trust-row { gap: 3.5rem; padding-right: 3.5rem; } }
+@media (min-width: 1280px) { .jcf-trust-row { gap: 4.5rem; padding-right: 4.5rem; } }
+.jcf-trust-logo {
+  height: 2rem;
+  width: auto;
+  opacity: 0.6;
+  filter: grayscale(100%) brightness(1.6);
+  transition: opacity .2s, filter .2s;
+}
+@media (min-width: 768px)  { .jcf-trust-logo { height: 2.5rem; } }
+@media (min-width: 1280px) { .jcf-trust-logo { height: 2.75rem; } }
+.jcf-trust-logo:hover { opacity: 1; filter: grayscale(0%) brightness(1); }
+
+/* ===== Bundle Section ===== */
+.jcf-bundle {
+  padding: clamp(2rem, 5vh, 3.5rem) 1.25rem clamp(1.5rem, 3vh, 2.5rem);
+  text-align: center;
+  position: relative;
+  isolation: isolate;
+}
+.jcf-bundle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 60%, rgba(56, 189, 248, 0.05), transparent 80%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.jcf-section-title {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin: 0 auto 1.25rem;
+  background-image: linear-gradient(to bottom right, #fff 0%, #fff 55%, rgba(255, 255, 255, 0.55));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-wrap: balance;
+  max-width: 56rem;
+  line-height: 1.2;
+}
+
+.jcf-badges {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background-image: linear-gradient(to right, var(--jc-blue-400), #5BA8FF, var(--jc-blue-400));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 1.75rem;
+  animation: jcf-shimmer 5s linear infinite;
+}
+.jcf-badges-sep { color: var(--jc-blue-400); -webkit-text-fill-color: var(--jc-blue-400); }
+
+/* ===== Bundle Offer Grid ===== */
+.jcf-offer-grid {
+  display: grid;
+  gap: 1.75rem;
+  max-width: 64rem;
+  margin: clamp(2rem, 4vh, 3rem) auto 0;
+  grid-template-columns: 1fr;
+  text-align: left;
+}
+@media (min-width: 768px) {
+  .jcf-offer-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+}
+.jcf-offer-item {}
+.jcf-offer-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: #fff;
+  line-height: 1.3;
+}
+.jcf-offer-text {
+  font-size: 0.9rem;
+  color: var(--jcf-muted);
+  margin: 0;
+  line-height: 1.55;
+}
+.jcf-offer-price {
+  display: inline-block;
+  font-weight: 600;
+  color: var(--jc-blue-300);
+  font-size: 0.9rem;
+  margin-top: 0.4rem;
+}
+
+/* ===== Total Value Line ===== */
+.jcf-total {
+  margin: 2rem auto 0.5rem;
+  font-size: 0.95rem;
+  color: var(--jcf-muted);
+  text-align: center;
+}
+.jcf-total-value { text-decoration: line-through; }
+.jcf-total-price {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  background-image: linear-gradient(to right, var(--jc-blue-300), var(--jc-blue-100), var(--jc-blue-300));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: jcf-shimmer 5s linear infinite;
+  letter-spacing: -0.005em;
+}
+
+/* ===== Process Section ===== */
+.jcf-process {
+  padding: clamp(1.25rem, 3vh, 2rem) 1.25rem clamp(0.25rem, 0.75vh, 0.5rem);
+  text-align: center;
+}
+.jcf-process .jcf-step:last-child { margin-bottom: 0; }
+.jcf-process-title {
+  font-size: clamp(1.5rem, 3.4vw, 2.25rem);
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin: 0 0 clamp(1rem, 2vh, 1.5rem);
+  background-image: linear-gradient(to right, var(--jc-blue-300), var(--jc-blue-100), var(--jc-blue-300));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: jcf-shimmer 5s linear infinite;
+}
+
+.jcf-step { margin: 0 auto clamp(1.25rem, 3vh, 2rem); max-width: 64rem; }
+.jcf-step-title {
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  font-weight: 600;
+  color: var(--jc-blue-300);
+  margin: 0 0 0.6rem;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.jcf-step-text {
+  font-size: 0.95rem;
+  color: var(--jcf-muted);
+  margin: 0 auto 0.75rem;
+  line-height: 1.6;
+  max-width: 38rem;
+}
+.jcf-step-text + .jcf-step-text { margin-top: -0.5rem; padding-top: 0.25rem; }
+.jcf-step-image {
+  margin: 0.5rem auto 0.75rem;
+  max-width: 48rem;
+}
+.jcf-step-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* kein border-radius, kein Glow — Bild bringt seinen Fade-Effekt selbst mit */
+}
+
+/* ===== Info Boxes (Wichtig + Achtung) ===== */
+.jcf-boxes {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 64rem;
+  margin: 0 auto clamp(1.25rem, 2.5vh, 1.75rem);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .jcf-boxes { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+}
+.jcf-box {
+  text-align: center;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  border-radius: var(--jcf-radius-lg);
+  position: relative;
+  isolation: isolate;
+}
+.jcf-box-eyebrow {
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin: 0 0 0.6rem;
+}
+.jcf-box-text {
+  font-size: 0.92rem;
+  color: var(--jcf-muted);
+  margin: 0 auto;
+  line-height: 1.6;
+  max-width: 36rem;
+}
+
+.jcf-box--info {
+  background: linear-gradient(160deg, rgba(12, 42, 74, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+.jcf-box--info .jcf-box-eyebrow { color: var(--jc-blue-300); }
+
+.jcf-box--warning {
+  background: linear-gradient(160deg, rgba(74, 22, 12, 0.4) 0%, rgba(0, 0, 0, 0.3) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+.jcf-box--warning .jcf-box-eyebrow { color: var(--jc-red); }
+
+/* ===== Final CTA Section ===== */
+.jcf-final {
+  padding: 0 1.25rem clamp(2.5rem, 6vh, 4rem);
+  text-align: center;
+}
+
+/* ===== Footer ===== */
+.jcf-footer {
+  padding: 2rem 1.25rem;
+  text-align: center;
+  border-top: 1px solid var(--jcf-border);
+  font-size: 0.78rem;
+  color: var(--jcf-muted-2);
+}
+.jcf-footer a { color: var(--jcf-muted); margin: 0 0.6rem; }
+.jcf-footer a:hover { color: var(--jc-blue-300); }
+
+/* ===== Animations ===== */
+@keyframes jcf-shimmer { 0% { background-position: 200% center; } 100% { background-position: 0% center; } }
+@keyframes jcf-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-100%, 0, 0); }
+}
+@keyframes jcf-pulse {
+  0%, 100% { box-shadow: 0 8px 32px rgba(56, 189, 248, 0.35); }
+  50%      { box-shadow: 0 14px 44px rgba(56, 189, 248, 0.55); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============= HERO ============= -->
+<section class="jcf-hero">
+  <header class="jcf-header">
+    <a href="/" class="jcf-logo" aria-label="JustClose, Selling IT smarter">
+      <img class="jcf-logo-img"
+           src="https://lh3.googleusercontent.com/d/1cjjKhcdZ3g-4t3pzomYENfLIopSNpy6m=w400"
+           alt="JustClose, Selling IT smarter"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
+      <span class="jcf-logo-mark" style="display:none;">
+        <span class="jcf-logo-just">JUST</span><span class="jcf-logo-close">CLOSE</span>
+      </span>
+    </a>
+  </header>
+
+  <div class="jcf-container">
+
+    <a class="jcf-back-link" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Hier geht's zum LinkedIn IT Sales Playbook
+    </a>
+
+    <p class="jcf-hook">
+      <strong>Aber Stopp!</strong> Du bist noch nicht fertig.<br>
+      Verpasse nicht dieses einmalige Geschenk.
+    </p>
+
+    <h1 class="jcf-headline">
+      Lass deine LinkedIn-Strategie für erste Anfragen <span id="jcfFirstName"></span>gratis von unseren Senior-Sales-Strategen aufbauen.
+    </h1>
+
+    <!-- Hero-Bild: Bundle-Showcase -->
+    <div class="jcf-media">
+      <div class="jcf-media-glow"></div>
+      <img src="https://lh3.googleusercontent.com/d/1tYJDYISdgGFr_ELGPcHT8YXwV5wl0zNl=w2400"
+           alt="JustClose IT-Sales Kickstarter Bundle: Leadmagnet, Bild-Posts, Profile"
+           loading="eager" fetchpriority="high">
+    </div>
+
+    <div class="jcf-cta-row">
+      <div class="jcf-cta-wrap is-pulse">
+        <span class="jcf-cta-wrap__halo"></span>
+        <a class="jcf-cta" href="#jcfBundleBookCal" id="jcfHeroCta">
+          <span class="jcf-cta__label">Jetzt das IT-Sales Kickstarter Bundle für 0&nbsp;€ sichern</span>
+          <svg class="jcf-cta__arrow" viewBox="0 0 17 9" fill="none" aria-hidden="true">
+            <path d="M0.5 4.5h14M11 1l3.5 3.5L11 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="jcf-cta__glow" aria-hidden="true"></span>
+        </a>
+      </div>
+      <p class="jcf-cta__sub">Kostenloses Erstgespräch + Bundle erhalten</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============= TRUST STRIP (mit Subline als Label) ============= -->
+<section class="jcf-trust">
+  <p class="jcf-trust-label">Exklusiv für IT-Dienstleister mit 5 bis 60 Mitarbeitern.</p>
+  <div class="jcf-trust-track">
+    <div class="jcf-trust-row">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1hPlJN6mM-IlQzPfHitxJSVk-WnfeXoXc=w400" alt="Logo 1" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1Ht9HCJKf4nkHWVxuJweC6ttaaQe0Ike5=w400" alt="Logo 2" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1co4htoDxGjJLWvYRcq8tnau0-DIm6Xvr=w400" alt="Logo 3" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1GH0GVLCf8G-qmWwjFtAiv1_Ii5MPLMkO=w400" alt="Logo 4" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/17Bi8LEvvLXFXaRR265GZDCmCZNfjyRN7=w400" alt="Logo 5" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/18MXyuV_aXOf3QjskV8IfqVwsUEd8SRZy=w400" alt="Logo 6" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1lxbbdFiM02n2deo7c0jhHhVKzUQeS1Ez=w400" alt="Logo 7" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1hKMHYYL8Bj_8bhepipRHmTlStcne7PCX=w400" alt="Logo 8" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1PZb8XC-LxBMqqR6rRv55bpTlToGK3kuv=w400" alt="Logo 9" loading="lazy">
+    </div>
+    <div class="jcf-trust-row" aria-hidden="true">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1hPlJN6mM-IlQzPfHitxJSVk-WnfeXoXc=w400" alt="" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1Ht9HCJKf4nkHWVxuJweC6ttaaQe0Ike5=w400" alt="" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1co4htoDxGjJLWvYRcq8tnau0-DIm6Xvr=w400" alt="" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1GH0GVLCf8G-qmWwjFtAiv1_Ii5MPLMkO=w400" alt="" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/17Bi8LEvvLXFXaRR265GZDCmCZNfjyRN7=w400" alt="" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/18MXyuV_aXOf3QjskV8IfqVwsUEd8SRZy=w400" alt="" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1lxbbdFiM02n2deo7c0jhHhVKzUQeS1Ez=w400" alt="" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1hKMHYYL8Bj_8bhepipRHmTlStcne7PCX=w400" alt="" loading="lazy">
+      <img class="jcf-trust-logo" src="https://lh3.googleusercontent.com/d/1PZb8XC-LxBMqqR6rRv55bpTlToGK3kuv=w400" alt="" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ============= BUNDLE DETAIL ============= -->
+<section class="jcf-bundle">
+  <div class="jcf-container">
+
+    <h2 class="jcf-section-title">
+      Erhalte +320-fach erprobte Strategien, individuell auf deine IT-Firma zugeschnitten:
+    </h2>
+
+    <div class="jcf-badges">
+      <span>LinkedIn-Setup</span>
+      <span class="jcf-badges-sep">·</span>
+      <span>Outreach-Sequenz</span>
+      <span class="jcf-badges-sep">·</span>
+      <span>Post-Templates</span>
+      <span class="jcf-badges-sep">·</span>
+      <span>Strategy-Call</span>
+    </div>
+
+    <!-- Bundle-Bild -->
+    <div class="jcf-media" style="max-width: 56rem; margin-top: 0;">
+      <div class="jcf-media-glow"></div>
+      <img src="https://lh3.googleusercontent.com/d/1t0IDTIlPQwOTsVhEj8ItYYO60CObZBaG=w2400"
+           alt="JustClose IT-Sales Bundle: Templates, Strategien, Funnels"
+           loading="lazy">
+    </div>
+
+    <!-- 3-Spalten Offer -->
+    <div class="jcf-offer-grid">
+
+      <div class="jcf-offer-item">
+        <h3 class="jcf-offer-title">Personalisierte LinkedIn-Outreach-Sequenz</h3>
+        <p class="jcf-offer-text">
+          inkl. Folge-Logiken auf die 3 häufigsten Reaktionen, abgestimmt auf deine Wunschkunden in der IT-Branche.
+        </p>
+        <span class="jcf-offer-price">Wert: 400&nbsp;€</span>
+      </div>
+
+      <div class="jcf-offer-item">
+        <h3 class="jcf-offer-title">60-Minuten IT-Sales-Strategie-Call</h3>
+        <p class="jcf-offer-text">
+          mit einem unserer Senior-Sales-Strategen. Bundle-Übergabe und individuelle Empfehlung für deinen nächsten Schritt.
+        </p>
+        <span class="jcf-offer-price">Wert: 250&nbsp;€</span>
+      </div>
+
+      <div class="jcf-offer-item">
+        <h3 class="jcf-offer-title">3 LinkedIn Post-Templates</h3>
+        <p class="jcf-offer-text">
+          für Geschäftsführer und Sales-Lead, mit Hooks, die in der IT speziell performen. Sofort einsetzbar.
+        </p>
+        <span class="jcf-offer-price">Wert: 350&nbsp;€</span>
+      </div>
+
+    </div>
+
+    <p class="jcf-total">
+      Gesamtwert: <span class="jcf-total-value">1.300&nbsp;€</span>
+      <span class="jcf-total-price">Dein Preis heute: 0&nbsp;€</span>
+    </p>
+
+    <div class="jcf-cta-row">
+      <div class="jcf-cta-wrap is-pulse">
+        <span class="jcf-cta-wrap__halo"></span>
+        <a class="jcf-cta" href="#jcfBundleBookCal">
+          <span class="jcf-cta__label">Jetzt das IT-Sales Kickstarter Bundle für 0&nbsp;€ sichern</span>
+          <svg class="jcf-cta__arrow" viewBox="0 0 17 9" fill="none" aria-hidden="true">
+            <path d="M0.5 4.5h14M11 1l3.5 3.5L11 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="jcf-cta__glow" aria-hidden="true"></span>
+        </a>
+      </div>
+      <p class="jcf-cta__sub">Kostenloses Erstgespräch + Bundle erhalten</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============= PROCESS / 3 STEPS ============= -->
+<section class="jcf-process" id="jcfBundleBookCal">
+  <div class="jcf-container">
+
+    <h2 class="jcf-process-title">So funktioniert es für dich:</h2>
+
+    <!-- Step 1 -->
+    <div class="jcf-step">
+      <h3 class="jcf-step-title">Termin buchen und bestätigen</h3>
+      <p class="jcf-step-text">
+        Wähle einen freien Slot in unserem Kalender. Prüfe, ob er als Bestätigung in deinem Kalender sichtbar ist.
+      </p>
+      <div class="jcf-step-image">
+        <img src="https://lh3.googleusercontent.com/d/1ziyyacdCdIlUSHVweJG-RBmkt9p_7afS=w2400"
+             alt="JustClose Termin-Buchung: IT-Sales Kickstarter Bundle"
+             loading="lazy">
+      </div>
+      <div class="jcf-cta-row">
+        <div class="jcf-cta-wrap">
+          <span class="jcf-cta-wrap__halo"></span>
+          <a class="jcf-cta" href="https://cal.com/justclose/it-sales-kickstarter?utm_source=oto" target="_blank" rel="noopener" id="jcfStepCta1">
+            <span class="jcf-cta__label">Jetzt das IT-Sales Kickstarter Bundle für 0&nbsp;€ sichern</span>
+            <svg class="jcf-cta__arrow" viewBox="0 0 17 9" fill="none" aria-hidden="true">
+              <path d="M0.5 4.5h14M11 1l3.5 3.5L11 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="jcf-cta__glow" aria-hidden="true"></span>
+          </a>
+        </div>
+        <p class="jcf-cta__sub">Kostenloses Erstgespräch + Bundle erhalten</p>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="jcf-step">
+      <h3 class="jcf-step-title">
+        Erkläre unseren Strategen kurz, wer du bist und was deine IT-Firma anbietet.
+      </h3>
+      <p class="jcf-step-text">
+        Unsere Senior-Sales-Strategen und Copywriter machen sich nach dem Briefing umgehend ans Werk und bauen deine personalisierten Templates.
+      </p>
+      <div class="jcf-step-image">
+        <img src="https://lh3.googleusercontent.com/d/1KJcKEYJUy2VNCJazJDa7nAKChM1rUHTK=w2400"
+             alt="Templates und Strategien werden für deine IT-Firma erstellt"
+             loading="lazy">
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="jcf-step">
+      <h3 class="jcf-step-title">
+        Erhalte im finalen Strategie-Call dein IT-Sales-Bundle inkl. aller Templates.
+      </h3>
+      <p class="jcf-step-text">
+        Im Call gehen wir gemeinsam durch das Bundle, klären deine Fragen zur Umsetzung und übergeben dir alle Dateien.
+      </p>
+      <p class="jcf-step-text">
+        Die Templates werden in einem zweiten Gespräch übergeben. Im 1. Call geht es um die Aufnahme und maßgeschneiderte Konzeption deiner Daten und deines ICP.
+      </p>
+      <div class="jcf-step-image">
+        <img src="https://lh3.googleusercontent.com/d/1FTLiE28GIfYBDof6Fma8FYy6EoUeCiL7=w2400"
+             alt="Finaler Strategie-Call: Bundle-Übergabe via Video"
+             loading="lazy">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============= INFO BOXES ============= -->
+<section class="jcf-final">
+  <div class="jcf-container">
+
+    <div class="jcf-boxes">
+
+      <div class="jcf-box jcf-box--info">
+        <div class="jcf-box-eyebrow">Wichtig: Dieses Angebot gilt nur für IT-Dienstleister und Tech-Start-ups ab 5 Mitarbeitern.</div>
+        <p class="jcf-box-text">
+          Wenn du diese Kriterien nicht erfüllst, können wir dir das Bundle leider nicht zur Verfügung stellen. Wir sind ehrlich mit dir, statt deine Zeit zu verschwenden.
+        </p>
+      </div>
+
+      <div class="jcf-box jcf-box--warning">
+        <div class="jcf-box-eyebrow">Achtung: Dieser Bonus ist begrenzt.</div>
+        <p class="jcf-box-text">
+          Aufgrund des hohen Aufwands für individuelle Konzeption durch unsere Senior-Sales-Strategen können wir das Kickstarter-Bundle nur einer begrenzten Anzahl an IT-Firmen pro Woche zur Verfügung stellen.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="jcf-cta-row">
+      <div class="jcf-cta-wrap is-pulse">
+        <span class="jcf-cta-wrap__halo"></span>
+        <a class="jcf-cta" href="https://cal.com/justclose/it-sales-kickstarter?utm_source=oto-bottom" target="_blank" rel="noopener" id="jcfFinalCta">
+          <span class="jcf-cta__label">Jetzt das IT-Sales Kickstarter Bundle für 0&nbsp;€ sichern</span>
+          <svg class="jcf-cta__arrow" viewBox="0 0 17 9" fill="none" aria-hidden="true">
+            <path d="M0.5 4.5h14M11 1l3.5 3.5L11 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="jcf-cta__glow" aria-hidden="true"></span>
+        </a>
+      </div>
+      <p class="jcf-cta__sub">Kostenloses Erstgespräch + Bundle erhalten</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============= FOOTER ============= -->
+<footer class="jcf-footer">
+  <p>&copy; <span id="jcfYear"></span> JustClose · Agentur mit Plan GmbH. Alle Rechte vorbehalten. ·
+    <a href="https://justclose.de/impressum/" target="_blank" rel="noopener">Impressum</a> ·
+    <a href="https://justclose.de/datenschutzerklaerung/" target="_blank" rel="noopener">Datenschutz</a></p>
+</footer>
+
+<!-- ============= JS ============= -->
+<script>
+(function(){
+  // Year
+  var yearEl = document.getElementById('jcfYear');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Personalisierung — Vorname aus Page-1-Submit (sessionStorage)
+  try {
+    var lead = JSON.parse(sessionStorage.getItem('jcf_lead') || '{}');
+    if (lead.firstName) {
+      var el = document.getElementById('jcfFirstName');
+      if (el) el.textContent = lead.firstName + ', ';
+    }
+  } catch(_){}
+
+  // ============================================================
+  // Tracking-Pings (n8n / Make / Zapier) — pro Lead Status updaten
+  // ============================================================
+  var TRACK_URL = 'https://n8n.justclose.de/webhook/linkedin-playbook-event';
+
+  function track(event, extras){
+    try {
+      var lead = JSON.parse(sessionStorage.getItem('jcf_lead') || '{}');
+      var payload = Object.assign({}, lead,
+        { event: event, eventAt: new Date().toISOString(), pageUrl: window.location.href },
+        extras || {});
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(TRACK_URL, new Blob([JSON.stringify(payload)], { type: 'application/json' }));
+      } else {
+        fetch(TRACK_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload), keepalive: true }).catch(function(){});
+      }
+    } catch(_){}
+  }
+
+  // CTA-Tracking: zähle, welcher CTA gefeuert hat
+  document.querySelectorAll('.jcf-cta').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var label = (btn.id || 'cta');
+      track('oto_cta_clicked', { ctaId: label, ctaHref: btn.getAttribute('href') });
+    });
+  });
+
+  // Page-View-Ping einmal feuern
+  track('oto_pageview');
+})();
+</script>
+
+</body>
+</html>
