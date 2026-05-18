@@ -300,20 +300,22 @@ a { color: inherit; }
   box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
 }
 .jcf-select {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23BAE6FF' stroke-width='1.5'><path d='M3 4.5L6 7.5L9 4.5'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23BAE6FF' stroke-width='1.6'><path d='M3 4.5L6 7.5L9 4.5'/></svg>");
   background-repeat: no-repeat;
-  background-position: right 1rem center;
-  padding-right: 2.5rem;
+  background-position: right 0.9rem center;
+  background-size: 12px 12px;
+  padding-right: 2.25rem;
 }
 
 /* Phone group: country + number */
 .jcf-phone-row { display: grid; grid-template-columns: 9rem 1fr; gap: 0.5rem; }
 @media (max-width: 480px) {
-  .jcf-phone-row { grid-template-columns: 6.5rem 1fr; gap: 0.4rem; }
+  .jcf-phone-row { grid-template-columns: 7.5rem 1fr; gap: 0.4rem; }
   .jcf-phone-row .jcf-select {
-    padding-left: 0.6rem;
-    padding-right: 1.6rem;
+    padding-left: 0.7rem;
+    padding-right: 1.5rem;
     background-position: right 0.55rem center;
+    background-size: 9px 9px;
     font-size: 0.9rem;
   }
 }
