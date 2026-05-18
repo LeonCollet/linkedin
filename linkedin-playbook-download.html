@@ -541,6 +541,14 @@ a { color: inherit; }
   margin: 0.5rem auto 0.75rem;
   max-width: 48rem;
 }
+/* Mobile: Step-Bilder full-bleed, brechen aus dem Container-Padding aus */
+@media (max-width: 480px) {
+  .jcf-step-image {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    max-width: none;
+  }
+}
 .jcf-step-image img {
   width: 100%;
   height: auto;
@@ -633,7 +641,7 @@ a { color: inherit; }
   <header class="jcf-header">
     <span class="jcf-logo" aria-label="JustClose, Selling IT smarter">
       <img class="jcf-logo-img"
-           src="https://lh3.googleusercontent.com/d/1cjjKhcdZ3g-4t3pzomYENfLIopSNpy6m=w400"
+           src="https://lh3.googleusercontent.com/d/19yQtKPzHPyu5ul4k73sUAyshAo3J8Ibo=w400"
            alt="JustClose, Selling IT smarter"
            onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
       <span class="jcf-logo-mark" style="display:none;">
@@ -663,7 +671,7 @@ a { color: inherit; }
     </p>
 
     <h1 class="jcf-headline">
-      Lass Deine LinkedIn-Strategie für erste Anfragen <span id="jcfFirstName"></span>gratis von unseren Senior-Sales-Strategen aufbauen.
+      Lass Deine LinkedIn-Strategie für erste Anfragen gratis von unseren Senior-Sales-Strategen aufbauen.
     </h1>
 
     <!-- Hero-Bild: Bundle-Showcase -->
@@ -809,7 +817,7 @@ a { color: inherit; }
         Wähle einen freien Slot in unserem Kalender. Prüfe, ob er als Bestätigung in Deinem Kalender sichtbar ist.
       </p>
       <div class="jcf-step-image">
-        <img src="https://lh3.googleusercontent.com/d/1ziyyacdCdIlUSHVweJG-RBmkt9p_7afS=w2400"
+        <img src="https://lh3.googleusercontent.com/d/1KJcKEYJUy2VNCJazJDa7nAKChM1rUHTK=w2400"
              alt="JustClose Termin-Buchung: IT-Sales Kickstarter Bundle"
              loading="lazy">
       </div>
@@ -837,8 +845,8 @@ a { color: inherit; }
         Unsere Senior-Sales-Strategen und Copywriter machen sich nach dem Briefing umgehend ans Werk und bauen Deine personalisierten Templates.
       </p>
       <div class="jcf-step-image">
-        <img src="https://lh3.googleusercontent.com/d/1KJcKEYJUy2VNCJazJDa7nAKChM1rUHTK=w2400"
-             alt="Templates und Strategien werden für deine IT-Firma erstellt"
+        <img src="https://lh3.googleusercontent.com/d/1ziyyacdCdIlUSHVweJG-RBmkt9p_7afS=w2400"
+             alt="Briefing-Call mit JustClose Senior-Sales-Strategen"
              loading="lazy">
       </div>
     </div>

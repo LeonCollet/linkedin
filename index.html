@@ -203,7 +203,15 @@ a { color: inherit; }
 .jcf-media {
   position: relative;
   margin: clamp(2rem, 5vh, 3.5rem) auto 0;
-  max-width: 32rem;
+  max-width: 36rem;
+}
+/* Mobile: Mockup full-bleed, bricht aus dem Container-Padding aus */
+@media (max-width: 480px) {
+  .jcf-media {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    max-width: none;
+  }
 }
 @media (min-width: 768px)  { .jcf-media { max-width: 42rem; } }
 @media (min-width: 1280px) { .jcf-media { max-width: 50rem; } }
@@ -709,7 +717,7 @@ a { color: inherit; }
   <header class="jcf-header">
     <span class="jcf-logo" aria-label="JustClose – Selling IT smarter">
       <img class="jcf-logo-img"
-           src="https://lh3.googleusercontent.com/d/1cjjKhcdZ3g-4t3pzomYENfLIopSNpy6m=w400"
+           src="https://lh3.googleusercontent.com/d/19yQtKPzHPyu5ul4k73sUAyshAo3J8Ibo=w400"
            alt="JustClose – Selling IT smarter"
            onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
       <span class="jcf-logo-mark" style="display:none;">
