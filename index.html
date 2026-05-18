@@ -980,7 +980,7 @@ a { color: inherit; }
   // Der Webhook leitet die Daten dann in Close CRM (POST /lead) +
   // optional weitere Ziele (SMS-Provider, Slack, Sheet).
   // ============================================================
-  var WEBHOOK_URL  = 'https://n8n.justclose.de/webhook/linkedin-playbook-lead';
+  var WEBHOOK_URL  = 'https://hooks.zapier.com/hooks/catch/25556690/4yeuik2/';
   var REDIRECT_URL = '/linkedin-playbook-download.html'; // bzw. './page-02-oto-download.html'
 
   // Beide Forms (oben + unten) mit gleichem Handler verdrahten
@@ -1023,23 +1023,24 @@ a { color: inherit; }
 
       if (btn) { btn.classList.add('is-loading'); btn.disabled = true; }
 
-      try {
-        var res = await fetch(WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-          keepalive: true
-        });
-        if (!res.ok) throw new Error('HTTP ' + res.status);
+      // Daten IMMER in sessionStorage parken (für Page 2 Personalisierung)
+      try { sessionStorage.setItem('jcf_lead', JSON.stringify(payload)); } catch(_){}
 
-        if (okEl) okEl.style.display = 'block';
-        try { sessionStorage.setItem('jcf_lead', JSON.stringify(payload)); } catch(_){}
-        window.location.href = REDIRECT_URL;
-      } catch(err){
-        console.error('[JCF] Submit failed', err);
-        showError('Hoppla, das hat nicht geklappt. Bitte probier es nochmal oder schreib uns kurz auf info@justclose.de.');
-        if (btn) { btn.classList.remove('is-loading'); btn.disabled = false; }
-      }
+      // Webhook im Hintergrund versuchen — Submit klappt auch wenn Webhook offline
+      fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).then(function(res){
+        if (!res.ok) console.warn('[JCF] Webhook HTTP', res.status);
+      }).catch(function(err){
+        console.warn('[JCF] Webhook offline — Lead-Daten nur lokal:', err);
+      });
+
+      // Sofort weiterleiten, unabhängig vom Webhook-Status
+      if (okEl) okEl.style.display = 'block';
+      setTimeout(function(){ window.location.href = REDIRECT_URL; }, 150);
     });
   });
 })();
