@@ -205,12 +205,14 @@ a { color: inherit; }
   margin: clamp(2rem, 5vh, 3.5rem) auto 0;
   max-width: 36rem;
 }
-/* Mobile: Mockup full-bleed — bricht aus Hero-Section UND Container-Padding aus
-   (Section: 1.25rem + Container: 1.5rem = 2.75rem total → -2.5rem lässt minimalen Rand) */
+/* Mobile: Mockup über die Viewport-Kante hinaus — Wrapper wird breiter als
+   das Display, Body cliped die seitlichen Überstände (overflow-x: hidden).
+   Effekt: Buchcover wirken visuell ~12-15 % größer, transparente PNG-Ränder
+   werden weggecroppt. */
 @media (max-width: 480px) {
   .jcf-media {
-    margin-left: -2.5rem;
-    margin-right: -2.5rem;
+    margin-left: -4rem;
+    margin-right: -4rem;
     max-width: none;
   }
 }
