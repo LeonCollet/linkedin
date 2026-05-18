@@ -52,7 +52,18 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background: var(--jcf-bg);
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(56, 189, 248, 0.08) 0%,
+      rgba(56, 189, 248, 0.14) 10%,
+      rgba(56, 189, 248, 0.12) 22%,
+      rgba(56, 189, 248, 0.08) 40%,
+      rgba(56, 189, 248, 0.05) 60%,
+      rgba(56, 189, 248, 0.02) 82%,
+      transparent 100%
+    ) no-repeat top center / 100% 90rem,
+    var(--jcf-bg);
   color: var(--jcf-fg);
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -120,22 +131,14 @@ a { color: inherit; }
 /* ===== Hero ===== */
 .jcf-hero {
   position: relative;
-  padding: 0 1.25rem clamp(1.5rem, 4vh, 3rem);
+  padding: 0 1.25rem clamp(0.25rem, 0.75vh, 0.75rem);
   text-align: center;
-  overflow: hidden;
+  overflow: visible;
   isolation: isolate;
 }
 .jcf-hero .jcf-header { padding-bottom: clamp(1.5rem, 4vh, 2.75rem); }
-.jcf-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 35% at 50% 0%, rgba(56, 189, 248, 0.22), transparent 65%),
-    radial-gradient(ellipse 110% 60% at 50% 115%, rgba(14, 165, 233, 0.18), transparent 75%);
-  z-index: -2;
-  pointer-events: none;
-}
+/* Hero-Glow ist jetzt Teil des body-level Unified Fades — kein Section-Glow mehr. */
+.jcf-hero::before { display: none; }
 .jcf-hero::after {
   content: "";
   position: absolute;
@@ -305,7 +308,15 @@ a { color: inherit; }
 
 /* Phone group: country + number */
 .jcf-phone-row { display: grid; grid-template-columns: 9rem 1fr; gap: 0.5rem; }
-@media (max-width: 420px) { .jcf-phone-row { grid-template-columns: 8rem 1fr; } }
+@media (max-width: 480px) {
+  .jcf-phone-row { grid-template-columns: 6.5rem 1fr; gap: 0.4rem; }
+  .jcf-phone-row .jcf-select {
+    padding-left: 0.6rem;
+    padding-right: 1.6rem;
+    background-position: right 0.55rem center;
+    font-size: 0.9rem;
+  }
+}
 
 .jcf-checkbox-row {
   display: flex;
@@ -396,10 +407,11 @@ a { color: inherit; }
 .jcf-cta__glow {
   position: absolute;
   z-index: -1;
-  top: 50%; left: 50%;
+  top: 50%; left: 0;
   width: 220px; height: 121px;
-  transform: translate(-50%, -50%);
+  transform: translate(115px, -50%) translateZ(0);
   pointer-events: none;
+  will-change: transform;
 }
 .jcf-cta__glow::before {
   content: "";
@@ -480,35 +492,20 @@ a { color: inherit; }
 /* ===== Trust Strip ===== */
 .jcf-trust {
   position: relative;
-  padding: clamp(1.5rem, 4vh, 2.75rem) 0 clamp(1.5rem, 4vh, 2.5rem);
+  padding: clamp(0.25rem, 0.75vh, 0.75rem) 0 clamp(1.5rem, 4vh, 2.5rem);
   margin-top: 0;
   text-align: center;
   isolation: isolate;
 }
-/* Durchgehender Cyan-Schleier mit weichem linearen Auslauf nach oben & unten —
-   bridge zwischen Hero und Trust + Trust und nächster Sektion. */
-.jcf-trust::before {
-  content: "";
-  position: absolute;
-  top: -16rem; left: 0; right: 0; bottom: -16rem;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(56, 189, 248, 0.04) 18%,
-    rgba(56, 189, 248, 0.10) 50%,
-    rgba(56, 189, 248, 0.04) 82%,
-    transparent 100%
-  );
-  pointer-events: none;
-  z-index: -1;
-}
+/* Trust-Glow ist jetzt Teil des body-level Unified Fades — kein Section-Glow mehr. */
+.jcf-trust::before { display: none; }
 .jcf-trust-label {
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--jcf-muted-2);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin: 0 0 1.5rem;
+  margin: 0 0 1.25rem;
 }
 .jcf-trust-track {
   display: flex;
@@ -625,7 +622,8 @@ a { color: inherit; }
 @media (min-width: 1280px) {
   .jcf-bullet-grid { gap: 1.5rem; max-width: 84rem; }
 }
-.jcf-bullet { text-align: left; }
+.jcf-bullet { text-align: center; }
+@media (min-width: 768px) { .jcf-bullet { text-align: left; } }
 .jcf-bullet-title {
   font-size: 1.05rem;
   font-weight: 600;
@@ -707,7 +705,7 @@ a { color: inherit; }
 <!-- ============= HERO (mit integriertem Header für nahtlosen Glow) ============= -->
 <section class="jcf-hero">
   <header class="jcf-header">
-    <a href="/" class="jcf-logo" aria-label="JustClose – Selling IT smarter">
+    <span class="jcf-logo" aria-label="JustClose – Selling IT smarter">
       <img class="jcf-logo-img"
            src="https://lh3.googleusercontent.com/d/1cjjKhcdZ3g-4t3pzomYENfLIopSNpy6m=w400"
            alt="JustClose – Selling IT smarter"
@@ -715,7 +713,7 @@ a { color: inherit; }
       <span class="jcf-logo-mark" style="display:none;">
         <span class="jcf-logo-just">JUST</span><span class="jcf-logo-close">CLOSE</span>
       </span>
-    </a>
+    </span>
   </header>
 
   <div class="jcf-container">
@@ -724,7 +722,7 @@ a { color: inherit; }
       Wie IT-Dienstleister durch LinkedIn planbar an Entscheider kommen, Verkaufszyklen halbieren und Umsatzziele übertreffen.
     </h1>
     <p class="jcf-hero-sub">
-      Validiert mit IT-Dienstleistern und Tech-Start-ups im DACH-Raum. Trag dich ein und lade dir das Playbook in unter 30 Sekunden.
+      Validiert mit IT-Dienstleistern und Tech-Start-ups im DACH-Raum. Trag Dich ein und lade Dir das Playbook<br>in unter 30 Sekunden.
     </p>
 
     <!-- Mockup-Bild (Buch-Mockup via Google Drive) -->
@@ -748,7 +746,7 @@ a { color: inherit; }
     <!-- ============= FORM ============= -->
     <div class="jcf-form-card">
       <h2 class="jcf-important-heading">Wichtig:</h2>
-      <p class="jcf-form-hint">Wir schicken es dir direkt <strong>per SMS</strong> zu.<br>Trage deshalb deine <strong>richtige Handynummer</strong> ein.</p>
+      <p class="jcf-form-hint">Wir schicken es Dir direkt <strong>per SMS</strong> zu.<br>Trage deshalb Deine <strong>richtige Handynummer</strong> ein.</p>
 
       <form class="jcf-form" id="jcfLeadForm" novalidate>
         <div class="jcf-name-row">
@@ -819,7 +817,7 @@ a { color: inherit; }
 <!-- ============= TRUST STRIP ============= -->
 <section class="jcf-trust">
   <p class="jcf-trust-label" style="font-style: italic; text-transform: none; font-size: 0.95rem; letter-spacing: 0; color: var(--jcf-muted);">
-    Validiert mit IT-Dienstleistern und Tech-Start-ups im DACH-Raum.
+    Validiert mit IT-Dienstleistern und Tech-Start-ups<br>im DACH-Raum.
   </p>
   <div class="jcf-trust-track">
     <div class="jcf-trust-row" id="jcfTrustRow">
@@ -877,7 +875,7 @@ a { color: inherit; }
 
       <div class="jcf-bullet">
         <h3 class="jcf-bullet-title">Die gemeinsame Sales-Sprache:</h3>
-        <p class="jcf-bullet-text">Eine Vorlage, die dein gesamtes Team gleichschaltet, statt 8 unterschiedliche Pitches zu produzieren.</p>
+        <p class="jcf-bullet-text">Eine Vorlage, die Dein gesamtes Team gleichschaltet, statt 8 unterschiedliche Pitches zu produzieren.</p>
       </div>
 
     </div>
@@ -892,7 +890,7 @@ a { color: inherit; }
 
     <div class="jcf-form-card">
       <h3 class="jcf-important-heading" style="text-align:center;">Wichtig:</h3>
-      <p class="jcf-form-hint">Wir schicken es dir direkt <strong>per SMS</strong> zu.<br>Trage deshalb deine <strong>richtige Handynummer</strong> ein.</p>
+      <p class="jcf-form-hint">Wir schicken es Dir direkt <strong>per SMS</strong> zu.<br>Trage deshalb Deine <strong>richtige Handynummer</strong> ein.</p>
 
       <form class="jcf-form" id="jcfLeadForm2" novalidate>
         <div class="jcf-name-row">
@@ -936,7 +934,7 @@ a { color: inherit; }
             <span class="jcf-cta-wrap__halo"></span>
             <button type="submit" class="jcf-cta">
               <span class="jcf-cta-spinner" aria-hidden="true"></span>
-              <span class="jcf-cta__label">Jetzt dein IT-Playbook herunterladen</span>
+              <span class="jcf-cta__label">Jetzt Dein IT-Playbook herunterladen</span>
               <svg class="jcf-cta__arrow" viewBox="0 0 17 9" fill="none" aria-hidden="true">
                 <path d="M0.5 4.5h14M11 1l3.5 3.5L11 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -982,7 +980,7 @@ a { color: inherit; }
   // Der Webhook leitet die Daten dann in Close CRM (POST /lead) +
   // optional weitere Ziele (SMS-Provider, Slack, Sheet).
   // ============================================================
-  var WEBHOOK_URL  = 'https://hooks.zapier.com/hooks/catch/25556690/4yeuik2/';
+  var WEBHOOK_URL  = 'https://n8n.justclose.de/webhook/linkedin-playbook-lead';
   var REDIRECT_URL = '/linkedin-playbook-download.html'; // bzw. './page-02-oto-download.html'
 
   // Beide Forms (oben + unten) mit gleichem Handler verdrahten
@@ -1028,7 +1026,7 @@ a { color: inherit; }
       try {
         var res = await fetch(WEBHOOK_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'text/plain' },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
           keepalive: true
         });
@@ -1042,6 +1040,60 @@ a { color: inherit; }
         showError('Hoppla, das hat nicht geklappt. Bitte probier es nochmal oder schreib uns kurz auf info@justclose.de.');
         if (btn) { btn.classList.remove('is-loading'); btn.disabled = false; }
       }
+    });
+  });
+})();
+
+/* ============================================================
+   Huly-CTA Mouse-Follow Glow
+   Innen-Glow folgt der Maus (geclippt durch overflow:hidden des Buttons),
+   Außen-Halo bewegt sich mit, blured weicher.
+   ============================================================ */
+(() => {
+  const wraps = document.querySelectorAll('.jcf-cta-wrap');
+  if (!wraps.length) return;
+
+  const REST_X     = 115;
+  const INNER_HALF = 110;
+  const EASING     = 0.12;
+
+  wraps.forEach((wrap) => {
+    const halo      = wrap.querySelector('.jcf-cta-wrap__halo');
+    const btn       = wrap.querySelector('.jcf-cta');
+    const innerGlow = btn && btn.querySelector('.jcf-cta__glow');
+    if (!halo || !btn || !innerGlow) return;
+
+    let currentInner = REST_X, targetInner = REST_X;
+    let currentHalo  = 0,      targetHalo  = 0;
+    let raf = null, hovering = false;
+
+    function loop() {
+      currentInner += (targetInner - currentInner) * EASING;
+      currentHalo  += (targetHalo  - currentHalo ) * EASING;
+      innerGlow.style.transform = `translate(${currentInner}px, -50%) translateZ(0)`;
+      halo.style.transform      = `translate(calc(-50% + ${currentHalo}px), -50%) translateZ(0)`;
+      if (!hovering &&
+          Math.abs(targetInner - currentInner) < 0.1 &&
+          Math.abs(targetHalo  - currentHalo)  < 0.1) {
+        raf = null;
+        return;
+      }
+      raf = requestAnimationFrame(loop);
+    }
+
+    btn.addEventListener('mouseenter', () => { hovering = true; });
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      targetInner = mouseX - INNER_HALF;
+      targetHalo  = mouseX - rect.width / 2;
+      if (!raf) raf = requestAnimationFrame(loop);
+    });
+    btn.addEventListener('mouseleave', () => {
+      hovering = false;
+      targetInner = REST_X;
+      targetHalo  = 0;
+      if (!raf) raf = requestAnimationFrame(loop);
     });
   });
 })();

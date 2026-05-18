@@ -45,7 +45,18 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background: var(--jcf-bg);
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(56, 189, 248, 0.08) 0%,
+      rgba(56, 189, 248, 0.14) 10%,
+      rgba(56, 189, 248, 0.12) 22%,
+      rgba(56, 189, 248, 0.08) 40%,
+      rgba(56, 189, 248, 0.05) 60%,
+      rgba(56, 189, 248, 0.02) 82%,
+      transparent 100%
+    ) no-repeat top center / 100% 90rem,
+    var(--jcf-bg);
   color: var(--jcf-fg);
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -82,20 +93,14 @@ a { color: inherit; }
 /* ===== Hero ===== */
 .jcf-hero {
   position: relative;
-  padding: 0 1.25rem clamp(1.5rem, 4vh, 3rem);
+  padding: 0 1.25rem clamp(0.25rem, 0.75vh, 0.75rem);
   text-align: center;
-  overflow: hidden;
+  overflow: visible;
   isolation: isolate;
 }
 .jcf-hero .jcf-header { padding-bottom: clamp(1rem, 3vh, 2rem); }
-.jcf-hero::before {
-  content: ""; position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 60% 35% at 50% 0%, rgba(56, 189, 248, 0.22), transparent 65%),
-    radial-gradient(ellipse 110% 60% at 50% 115%, rgba(14, 165, 233, 0.18), transparent 75%);
-  z-index: -2;
-  pointer-events: none;
-}
+/* Hero-Glow ist jetzt Teil des body-level Unified Fades — kein Section-Glow mehr. */
+.jcf-hero::before { display: none; }
 .jcf-hero::after {
   content: ""; position: absolute; inset: 0;
   background-image:
@@ -268,10 +273,11 @@ a { color: inherit; }
 .jcf-cta__glow {
   position: absolute;
   z-index: -1;
-  top: 50%; left: 50%;
+  top: 50%; left: 0;
   width: 220px; height: 121px;
-  transform: translate(-50%, -50%);
+  transform: translate(115px, -50%) translateZ(0);
   pointer-events: none;
+  will-change: transform;
 }
 .jcf-cta__glow::before {
   content: "";
@@ -320,28 +326,12 @@ a { color: inherit; }
 /* ===== Trust Strip ===== */
 .jcf-trust {
   position: relative;
-  padding: clamp(0.75rem, 2vh, 1.5rem) 0 clamp(1.5rem, 4vh, 2.5rem);
+  padding: clamp(0.25rem, 0.75vh, 0.75rem) 0 clamp(1.5rem, 4vh, 2.5rem);
   text-align: center;
   isolation: isolate;
 }
-/* Ein durchgehender Cyan-Schleier über die ganze Trust-Section + Bridge zur nächsten —
-   ein einziges Gradient mit weichem linearen Auslauf nach oben & unten,
-   damit kein „blauer Streifen" mit harten Kanten entsteht. */
-.jcf-trust::before {
-  content: "";
-  position: absolute;
-  top: -16rem; left: 0; right: 0; bottom: -16rem;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(56, 189, 248, 0.04) 20%,
-    rgba(56, 189, 248, 0.10) 50%,
-    rgba(56, 189, 248, 0.04) 80%,
-    transparent 100%
-  );
-  pointer-events: none;
-  z-index: -1;
-}
+/* Trust-Glow ist jetzt Teil des body-level Unified Fades — kein Section-Glow mehr. */
+.jcf-trust::before { display: none; }
 .jcf-trust-label {
   font-size: clamp(0.95rem, 1.4vw, 1.05rem);
   font-weight: 500;
@@ -386,13 +376,10 @@ a { color: inherit; }
   position: relative;
   isolation: isolate;
 }
+/* Bundle hat KEINEN eigenen Background-Layer mehr — Trust-Gradient extending
+   reicht bis tief in die Bundle-Section, keine konkurrierenden Layers. */
 .jcf-bundle::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 70% 60% at 50% 60%, rgba(56, 189, 248, 0.05), transparent 80%);
-  z-index: -1;
-  pointer-events: none;
+  content: none;
 }
 
 .jcf-section-title {
@@ -411,10 +398,13 @@ a { color: inherit; }
 }
 
 .jcf-badges {
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  max-width: 22rem;
+  margin: 0 auto 1.75rem;
   font-size: 0.95rem;
   font-weight: 600;
   background-image: linear-gradient(to right, var(--jc-blue-400), #5BA8FF, var(--jc-blue-400));
@@ -422,10 +412,35 @@ a { color: inherit; }
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  margin-bottom: 1.75rem;
   animation: jcf-shimmer 5s linear infinite;
 }
-.jcf-badges-sep { color: var(--jc-blue-400); -webkit-text-fill-color: var(--jc-blue-400); }
+.jcf-badges > span:not(.jcf-badges-sep) {
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  background: rgba(56, 189, 248, 0.05);
+  width: 100%;
+  text-align: center;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+}
+.jcf-badges-sep { display: none; }
+@media (min-width: 768px) {
+  .jcf-badges {
+    display: inline-flex;
+    flex-wrap: wrap;
+    grid-template-columns: none;
+    gap: 0.5rem 1.25rem;
+    max-width: none;
+  }
+  .jcf-badges > span:not(.jcf-badges-sep) {
+    padding: 0;
+    border: none;
+    background: none;
+    width: auto;
+  }
+  .jcf-badges-sep { display: inline; color: var(--jc-blue-400); -webkit-text-fill-color: var(--jc-blue-400); }
+}
 
 /* ===== Bundle Offer Grid ===== */
 .jcf-offer-grid {
@@ -434,10 +449,10 @@ a { color: inherit; }
   max-width: 64rem;
   margin: clamp(2rem, 4vh, 3rem) auto 0;
   grid-template-columns: 1fr;
-  text-align: left;
+  text-align: center;
 }
 @media (min-width: 768px) {
-  .jcf-offer-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .jcf-offer-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; text-align: left; }
 }
 .jcf-offer-item {}
 .jcf-offer-title {
@@ -615,7 +630,7 @@ a { color: inherit; }
 <!-- ============= HERO ============= -->
 <section class="jcf-hero">
   <header class="jcf-header">
-    <a href="/" class="jcf-logo" aria-label="JustClose, Selling IT smarter">
+    <span class="jcf-logo" aria-label="JustClose, Selling IT smarter">
       <img class="jcf-logo-img"
            src="https://lh3.googleusercontent.com/d/1cjjKhcdZ3g-4t3pzomYENfLIopSNpy6m=w400"
            alt="JustClose, Selling IT smarter"
@@ -623,27 +638,31 @@ a { color: inherit; }
       <span class="jcf-logo-mark" style="display:none;">
         <span class="jcf-logo-just">JUST</span><span class="jcf-logo-close">CLOSE</span>
       </span>
-    </a>
+    </span>
   </header>
 
   <div class="jcf-container">
 
-    <a class="jcf-back-link" href="index.html">
+    <a class="jcf-back-link"
+       href="https://drive.google.com/uc?export=download&amp;id=1h3hR6JOFa45xl_kLXynLOa96kOClnpFi"
+       download="LinkedIn-IT-Sales-Playbook.pdf"
+       target="_blank"
+       rel="noopener">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
         <polyline points="7 10 12 15 17 10"/>
         <line x1="12" y1="15" x2="12" y2="3"/>
       </svg>
-      Hier geht's zum LinkedIn IT Sales Playbook
+      Playbook jetzt herunterladen
     </a>
 
     <p class="jcf-hook">
-      <strong>Aber Stopp!</strong> Du bist noch nicht fertig.<br>
-      Verpasse nicht dieses einmalige Geschenk.
+      <strong>Aber Stopp!</strong><br>
+      Du bist noch nicht fertig. Verpasse nicht dieses einmalige Geschenk.
     </p>
 
     <h1 class="jcf-headline">
-      Lass deine LinkedIn-Strategie für erste Anfragen <span id="jcfFirstName"></span>gratis von unseren Senior-Sales-Strategen aufbauen.
+      Lass Deine LinkedIn-Strategie für erste Anfragen <span id="jcfFirstName"></span>gratis von unseren Senior-Sales-Strategen aufbauen.
     </h1>
 
     <!-- Hero-Bild: Bundle-Showcase -->
@@ -657,7 +676,7 @@ a { color: inherit; }
     <div class="jcf-cta-row">
       <div class="jcf-cta-wrap is-pulse">
         <span class="jcf-cta-wrap__halo"></span>
-        <a class="jcf-cta" href="#jcfBundleBookCal" id="jcfHeroCta">
+        <a class="jcf-cta" href="https://calendly.com/lb-justclose/it-sales-kickstarter-bundle?utm_source=oto-hero" target="_blank" rel="noopener" id="jcfHeroCta">
           <span class="jcf-cta__label">Jetzt das IT-Sales Kickstarter Bundle für 0&nbsp;€ sichern</span>
           <svg class="jcf-cta__arrow" viewBox="0 0 17 9" fill="none" aria-hidden="true">
             <path d="M0.5 4.5h14M11 1l3.5 3.5L11 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -704,7 +723,7 @@ a { color: inherit; }
   <div class="jcf-container">
 
     <h2 class="jcf-section-title">
-      Erhalte +320-fach erprobte Strategien, individuell auf deine IT-Firma zugeschnitten:
+      Erhalte +320-fach erprobte Strategien, individuell auf Deine IT-Firma zugeschnitten:
     </h2>
 
     <div class="jcf-badges">
@@ -731,7 +750,7 @@ a { color: inherit; }
       <div class="jcf-offer-item">
         <h3 class="jcf-offer-title">Personalisierte LinkedIn-Outreach-Sequenz</h3>
         <p class="jcf-offer-text">
-          inkl. Folge-Logiken auf die 3 häufigsten Reaktionen, abgestimmt auf deine Wunschkunden in der IT-Branche.
+          inkl. Folge-Logiken auf die 3 häufigsten Reaktionen, abgestimmt auf Deine Wunschkunden in der IT-Branche.
         </p>
         <span class="jcf-offer-price">Wert: 400&nbsp;€</span>
       </div>
@@ -739,7 +758,7 @@ a { color: inherit; }
       <div class="jcf-offer-item">
         <h3 class="jcf-offer-title">60-Minuten IT-Sales-Strategie-Call</h3>
         <p class="jcf-offer-text">
-          mit einem unserer Senior-Sales-Strategen. Bundle-Übergabe und individuelle Empfehlung für deinen nächsten Schritt.
+          mit einem unserer Senior-Sales-Strategen. Bundle-Übergabe und individuelle Empfehlung für Deinen nächsten Schritt.
         </p>
         <span class="jcf-offer-price">Wert: 250&nbsp;€</span>
       </div>
@@ -762,7 +781,7 @@ a { color: inherit; }
     <div class="jcf-cta-row">
       <div class="jcf-cta-wrap is-pulse">
         <span class="jcf-cta-wrap__halo"></span>
-        <a class="jcf-cta" href="#jcfBundleBookCal">
+        <a class="jcf-cta" href="https://calendly.com/lb-justclose/it-sales-kickstarter-bundle?utm_source=oto-bundle" target="_blank" rel="noopener">
           <span class="jcf-cta__label">Jetzt das IT-Sales Kickstarter Bundle für 0&nbsp;€ sichern</span>
           <svg class="jcf-cta__arrow" viewBox="0 0 17 9" fill="none" aria-hidden="true">
             <path d="M0.5 4.5h14M11 1l3.5 3.5L11 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -786,7 +805,7 @@ a { color: inherit; }
     <div class="jcf-step">
       <h3 class="jcf-step-title">Termin buchen und bestätigen</h3>
       <p class="jcf-step-text">
-        Wähle einen freien Slot in unserem Kalender. Prüfe, ob er als Bestätigung in deinem Kalender sichtbar ist.
+        Wähle einen freien Slot in unserem Kalender. Prüfe, ob er als Bestätigung in Deinem Kalender sichtbar ist.
       </p>
       <div class="jcf-step-image">
         <img src="https://lh3.googleusercontent.com/d/1ziyyacdCdIlUSHVweJG-RBmkt9p_7afS=w2400"
@@ -796,7 +815,7 @@ a { color: inherit; }
       <div class="jcf-cta-row">
         <div class="jcf-cta-wrap">
           <span class="jcf-cta-wrap__halo"></span>
-          <a class="jcf-cta" href="https://cal.com/justclose/it-sales-kickstarter?utm_source=oto" target="_blank" rel="noopener" id="jcfStepCta1">
+          <a class="jcf-cta" href="https://calendly.com/lb-justclose/it-sales-kickstarter-bundle?utm_source=oto-step1" target="_blank" rel="noopener" id="jcfStepCta1">
             <span class="jcf-cta__label">Jetzt das IT-Sales Kickstarter Bundle für 0&nbsp;€ sichern</span>
             <svg class="jcf-cta__arrow" viewBox="0 0 17 9" fill="none" aria-hidden="true">
               <path d="M0.5 4.5h14M11 1l3.5 3.5L11 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -811,10 +830,10 @@ a { color: inherit; }
     <!-- Step 2 -->
     <div class="jcf-step">
       <h3 class="jcf-step-title">
-        Erkläre unseren Strategen kurz, wer du bist und was deine IT-Firma anbietet.
+        Erkläre unseren Strategen kurz, wer Du bist und was Deine IT-Firma anbietet.
       </h3>
       <p class="jcf-step-text">
-        Unsere Senior-Sales-Strategen und Copywriter machen sich nach dem Briefing umgehend ans Werk und bauen deine personalisierten Templates.
+        Unsere Senior-Sales-Strategen und Copywriter machen sich nach dem Briefing umgehend ans Werk und bauen Deine personalisierten Templates.
       </p>
       <div class="jcf-step-image">
         <img src="https://lh3.googleusercontent.com/d/1KJcKEYJUy2VNCJazJDa7nAKChM1rUHTK=w2400"
@@ -826,13 +845,13 @@ a { color: inherit; }
     <!-- Step 3 -->
     <div class="jcf-step">
       <h3 class="jcf-step-title">
-        Erhalte im finalen Strategie-Call dein IT-Sales-Bundle inkl. aller Templates.
+        Erhalte im finalen Strategie-Call Dein IT-Sales-Bundle inkl. aller Templates.
       </h3>
       <p class="jcf-step-text">
-        Im Call gehen wir gemeinsam durch das Bundle, klären deine Fragen zur Umsetzung und übergeben dir alle Dateien.
+        Im Call gehen wir gemeinsam durch das Bundle, klären Deine Fragen zur Umsetzung und übergeben Dir alle Dateien.
       </p>
       <p class="jcf-step-text">
-        Die Templates werden in einem zweiten Gespräch übergeben. Im 1. Call geht es um die Aufnahme und maßgeschneiderte Konzeption deiner Daten und deines ICP.
+        Die Templates werden in einem zweiten Gespräch übergeben. Im 1. Call geht es um die Aufnahme und maßgeschneiderte Konzeption Deiner Daten und Deines ICP.
       </p>
       <div class="jcf-step-image">
         <img src="https://lh3.googleusercontent.com/d/1FTLiE28GIfYBDof6Fma8FYy6EoUeCiL7=w2400"
@@ -853,7 +872,7 @@ a { color: inherit; }
       <div class="jcf-box jcf-box--info">
         <div class="jcf-box-eyebrow">Wichtig: Dieses Angebot gilt nur für IT-Dienstleister und Tech-Start-ups ab 5 Mitarbeitern.</div>
         <p class="jcf-box-text">
-          Wenn du diese Kriterien nicht erfüllst, können wir dir das Bundle leider nicht zur Verfügung stellen. Wir sind ehrlich mit dir, statt deine Zeit zu verschwenden.
+          Wenn Du diese Kriterien nicht erfüllst, können wir Dir das Bundle leider nicht zur Verfügung stellen. Wir sind ehrlich mit Dir, statt Deine Zeit zu verschwenden.
         </p>
       </div>
 
@@ -869,7 +888,7 @@ a { color: inherit; }
     <div class="jcf-cta-row">
       <div class="jcf-cta-wrap is-pulse">
         <span class="jcf-cta-wrap__halo"></span>
-        <a class="jcf-cta" href="https://cal.com/justclose/it-sales-kickstarter?utm_source=oto-bottom" target="_blank" rel="noopener" id="jcfFinalCta">
+        <a class="jcf-cta" href="https://calendly.com/lb-justclose/it-sales-kickstarter-bundle?utm_source=oto-final" target="_blank" rel="noopener" id="jcfFinalCta">
           <span class="jcf-cta__label">Jetzt das IT-Sales Kickstarter Bundle für 0&nbsp;€ sichern</span>
           <svg class="jcf-cta__arrow" viewBox="0 0 17 9" fill="none" aria-hidden="true">
             <path d="M0.5 4.5h14M11 1l3.5 3.5L11 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -935,6 +954,60 @@ a { color: inherit; }
 
   // Page-View-Ping einmal feuern
   track('oto_pageview');
+})();
+
+/* ============================================================
+   Huly-CTA Mouse-Follow Glow
+   Innen-Glow folgt der Maus (geclippt durch overflow:hidden des Buttons),
+   Außen-Halo bewegt sich mit, blured weicher.
+   ============================================================ */
+(() => {
+  const wraps = document.querySelectorAll('.jcf-cta-wrap');
+  if (!wraps.length) return;
+
+  const REST_X     = 115;
+  const INNER_HALF = 110;
+  const EASING     = 0.12;
+
+  wraps.forEach((wrap) => {
+    const halo      = wrap.querySelector('.jcf-cta-wrap__halo');
+    const btn       = wrap.querySelector('.jcf-cta');
+    const innerGlow = btn && btn.querySelector('.jcf-cta__glow');
+    if (!halo || !btn || !innerGlow) return;
+
+    let currentInner = REST_X, targetInner = REST_X;
+    let currentHalo  = 0,      targetHalo  = 0;
+    let raf = null, hovering = false;
+
+    function loop() {
+      currentInner += (targetInner - currentInner) * EASING;
+      currentHalo  += (targetHalo  - currentHalo ) * EASING;
+      innerGlow.style.transform = `translate(${currentInner}px, -50%) translateZ(0)`;
+      halo.style.transform      = `translate(calc(-50% + ${currentHalo}px), -50%) translateZ(0)`;
+      if (!hovering &&
+          Math.abs(targetInner - currentInner) < 0.1 &&
+          Math.abs(targetHalo  - currentHalo)  < 0.1) {
+        raf = null;
+        return;
+      }
+      raf = requestAnimationFrame(loop);
+    }
+
+    btn.addEventListener('mouseenter', () => { hovering = true; });
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      targetInner = mouseX - INNER_HALF;
+      targetHalo  = mouseX - rect.width / 2;
+      if (!raf) raf = requestAnimationFrame(loop);
+    });
+    btn.addEventListener('mouseleave', () => {
+      hovering = false;
+      targetInner = REST_X;
+      targetHalo  = 0;
+      if (!raf) raf = requestAnimationFrame(loop);
+    });
+  });
 })();
 </script>
 
