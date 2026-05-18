@@ -541,12 +541,19 @@ a { color: inherit; }
   margin: 0.5rem auto 0.75rem;
   max-width: 48rem;
 }
-/* Mobile: Step-Bilder full-bleed, brechen aus dem Container-Padding aus */
+/* Mobile: Step-Bilder full-bleed — brechen aus Section UND Container-Padding aus
+   (Section: 1.25rem + Container: 1.5rem = 2.75rem → -2.5rem lässt minimalen Rand) */
 @media (max-width: 480px) {
   .jcf-step-image {
-    margin-left: -1rem;
-    margin-right: -1rem;
+    margin-left: -2.5rem;
+    margin-right: -2.5rem;
     max-width: none;
+  }
+  /* Auch das Hero-Mockup (Bundle-Showcase) und das Bundle-Inline-Bild full-bleed */
+  .jcf-media {
+    margin-left: -2.5rem !important;
+    margin-right: -2.5rem !important;
+    max-width: none !important;
   }
 }
 .jcf-step-image img {
