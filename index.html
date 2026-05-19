@@ -1057,20 +1057,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       // Daten IMMER in sessionStorage parken (für Page 2 Personalisierung)
       try { sessionStorage.setItem('jcf_lead', JSON.stringify(payload)); } catch(_){}
 
-      // Webhook im Hintergrund versuchen — Submit klappt auch wenn Webhook offline
-      fetch(WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-        keepalive: true
-      }).then(function(res){
-        if (!res.ok) console.warn('[JCF] Webhook HTTP', res.status);
-      }).catch(function(err){
-        console.warn('[JCF] Webhook offline — Lead-Daten nur lokal:', err);
-      });
+      // Webhook robust feuern: sendBeacon (CORS-safelist, redirect-safe) + fetch-Fallback
+      // Content-Type 'text/plain' vermeidet CORS-Preflight, Zapier parst JSON-Body trotzdem
+      var payloadStr = JSON.stringify(payload);
+      var beaconOk = false;
+      try {
+        if (navigator.sendBeacon) {
+          var blob = new Blob([payloadStr], { type: 'text/plain' });
+          beaconOk = navigator.sendBeacon(WEBHOOK_URL, blob);
+          if (beaconOk) console.log('[JCF] Webhook gesendet via sendBeacon');
+        }
+      } catch(e){ console.warn('[JCF] sendBeacon Error:', e); }
+
+      // Fallback wenn sendBeacon nicht unterstützt oder fehlgeschlagen
+      if (!beaconOk) {
+        fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain' },
+          body: payloadStr,
+          keepalive: true,
+          mode: 'no-cors'
+        }).then(function(){ console.log('[JCF] Webhook gesendet via fetch'); })
+          .catch(function(err){ console.warn('[JCF] Webhook failed:', err); });
+      }
 
       // GTM DataLayer: Lead-Conversion-Event feuern
-      // Hier triggert GTM später die Meta-, Google-Ads- und LinkedIn-Conversions
+      // Hier triggert GTM die Meta-, Google-Ads- und LinkedIn-Conversions
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: 'form_submitted',
@@ -1081,9 +1093,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         utm_campaign:payload.utmCampaign|| ''
       });
 
-      // Sofort weiterleiten, unabhängig vom Webhook-Status
+      // Weiterleiten — 400ms damit Beacon + GTM-Pixel garantiert durch sind
       if (okEl) okEl.style.display = 'block';
-      setTimeout(function(){ window.location.href = REDIRECT_URL; }, 150);
+      setTimeout(function(){ window.location.href = REDIRECT_URL; }, 400);
     });
   });
 })();
