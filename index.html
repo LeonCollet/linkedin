@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
 <meta name="robots" content="noindex,nofollow">
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TL2VWKCM');</script>
+<!-- End Google Tag Manager -->
+
 <title>Das LinkedIn IT Sales Playbook – JustClose</title>
 <meta name="description" content="Wie IT-Dienstleister durch LinkedIn planbar an Entscheider kommen, Verkaufszyklen halbieren und Umsatzziele übertreffen.">
 
@@ -211,10 +220,14 @@ a { color: inherit; }
    werden weggecroppt. */
 @media (max-width: 480px) {
   .jcf-media {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
     margin-left: -3.25rem;
     margin-right: -3.25rem;
     max-width: none;
   }
+  /* Form-Card näher ans Mockup ranziehen */
+  .jcf-form-card { margin-top: 0.25rem; }
 }
 @media (min-width: 768px)  { .jcf-media { max-width: 42rem; } }
 @media (min-width: 1280px) { .jcf-media { max-width: 50rem; } }
@@ -715,6 +728,11 @@ a { color: inherit; }
 </head>
 <body>
 
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TL2VWKCM"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
 <!-- ============= HERO (mit integriertem Header für nahtlosen Glow) ============= -->
 <section class="jcf-hero">
   <header class="jcf-header">
@@ -1049,6 +1067,18 @@ a { color: inherit; }
         if (!res.ok) console.warn('[JCF] Webhook HTTP', res.status);
       }).catch(function(err){
         console.warn('[JCF] Webhook offline — Lead-Daten nur lokal:', err);
+      });
+
+      // GTM DataLayer: Lead-Conversion-Event feuern
+      // Hier triggert GTM später die Meta-, Google-Ads- und LinkedIn-Conversions
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'form_submitted',
+        form_position: payload.formPosition || 'top',
+        lead_source: payload.leadSource || 'linkedin-playbook-landing',
+        utm_source:  payload.utmSource  || '',
+        utm_medium:  payload.utmMedium  || '',
+        utm_campaign:payload.utmCampaign|| ''
       });
 
       // Sofort weiterleiten, unabhängig vom Webhook-Status
