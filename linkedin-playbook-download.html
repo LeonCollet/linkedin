@@ -956,22 +956,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   } catch(_){}
 
   // ============================================================
-  // Tracking-Pings (n8n / Make / Zapier) — pro Lead Status updaten
+  // Event-Tracking läuft jetzt vollständig über GTM/DataLayer (siehe weiter unten).
+  // Die `track()`-Funktion ist nur noch ein No-op-Stub für Legacy-Aufrufe —
+  // keine externen Webhooks mehr, kein ERR_NAME_NOT_RESOLVED.
   // ============================================================
-  var TRACK_URL = 'https://n8n.justclose.de/webhook/linkedin-playbook-event';
-
   function track(event, extras){
-    try {
-      var lead = JSON.parse(sessionStorage.getItem('jcf_lead') || '{}');
-      var payload = Object.assign({}, lead,
-        { event: event, eventAt: new Date().toISOString(), pageUrl: window.location.href },
-        extras || {});
-      if (navigator.sendBeacon) {
-        navigator.sendBeacon(TRACK_URL, new Blob([JSON.stringify(payload)], { type: 'application/json' }));
-      } else {
-        fetch(TRACK_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload), keepalive: true }).catch(function(){});
-      }
-    } catch(_){}
+    // Optional: lokales Console-Log für Debugging
+    // console.log('[JCF] event:', event, extras || '');
   }
 
   // CTA-Tracking: zähle, welcher CTA gefeuert hat

@@ -1007,12 +1007,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   setVal('jcfPageUrl',     window.location.href);
 
   // ============================================================
-  // CONFIG — hier deinen n8n / Make / Zapier Webhook eintragen.
-  // Der Webhook leitet die Daten dann in Close CRM (POST /lead) +
-  // optional weitere Ziele (SMS-Provider, Slack, Sheet).
+  // CONFIG — Same-origin Lead-Endpoint via Vercel Function
+  // /api/lead → forwards an Zapier mit server-side Retry (3×)
+  // Vorteil: kein CORS, kein AdBlocker-Risiko, garantierte Zustellung
   // ============================================================
-  var WEBHOOK_URL  = 'https://hooks.zapier.com/hooks/catch/25556690/4yeuik2/';
-  var REDIRECT_URL = '/linkedin-playbook-download.html'; // bzw. './page-02-oto-download.html'
+  var LEAD_ENDPOINT = '/api/lead';
+  var REDIRECT_URL  = '/linkedin-playbook-download';
+  // Legacy-Webhook für Fallback (nur falls /api/lead nicht erreichbar):
+  var FALLBACK_WEBHOOK = 'https://hooks.zapier.com/hooks/catch/25556690/4yeuik2/';
+
+  // ============================================================
+  // Retry-Queue: bei Page-Load offene Leads aus localStorage nachsenden
+  // (Falls beim letzten Submit Netzwerk-Probleme oder Browser-Crash)
+  // ============================================================
+  (function processLeadQueue() {
+    try {
+      var queue = JSON.parse(localStorage.getItem('jcf_lead_queue') || '[]');
+      if (!queue.length) return;
+      console.log('[JCF] Retry-Queue: ' + queue.length + ' Lead(s) werden nachgesendet');
+
+      var remaining = [];
+      var pending   = queue.length;
+
+      queue.forEach(function(entry){
+        fetch(LEAD_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(Object.assign({}, entry.payload, { retried_from_queue: entry.queuedAt }))
+        }).then(function(res){
+          pending--;
+          if (!res.ok) remaining.push(entry);
+          else console.log('[JCF] Queue-Lead erfolgreich nachgesendet');
+          if (pending === 0) localStorage.setItem('jcf_lead_queue', JSON.stringify(remaining));
+        }).catch(function(err){
+          pending--;
+          remaining.push(entry);
+          if (pending === 0) localStorage.setItem('jcf_lead_queue', JSON.stringify(remaining));
+        });
+      });
+    } catch(e){ console.warn('[JCF] Queue processing error:', e); }
+  })();
 
   // Beide Forms (oben + unten) mit gleichem Handler verdrahten
   var forms = document.querySelectorAll('#jcfLeadForm, #jcfLeadForm2');
@@ -1057,32 +1091,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       // Daten IMMER in sessionStorage parken (für Page 2 Personalisierung)
       try { sessionStorage.setItem('jcf_lead', JSON.stringify(payload)); } catch(_){}
 
-      // Webhook robust feuern: sendBeacon (CORS-safelist, redirect-safe) + fetch-Fallback
-      // Content-Type 'text/plain' vermeidet CORS-Preflight, Zapier parst JSON-Body trotzdem
+      // 3-stufige Zustellgarantie:
+      // (1) Primär: sendBeacon zu /api/lead (same-origin, redirect-safe)
+      // (2) Fallback: fetch zu /api/lead
+      // (3) Belt-and-Suspenders: bei Misserfolg in localStorage-Queue speichern
+      //     und beim nächsten Page-Load nachsenden
       var payloadStr = JSON.stringify(payload);
-      var beaconOk = false;
+      var sent = false;
+
+      // (1) sendBeacon — Browser garantiert Versand auch bei Redirect
       try {
         if (navigator.sendBeacon) {
-          var blob = new Blob([payloadStr], { type: 'text/plain' });
-          beaconOk = navigator.sendBeacon(WEBHOOK_URL, blob);
-          if (beaconOk) console.log('[JCF] Webhook gesendet via sendBeacon');
+          var blob = new Blob([payloadStr], { type: 'application/json' });
+          sent = navigator.sendBeacon(LEAD_ENDPOINT, blob);
+          if (sent) console.log('[JCF] Lead via sendBeacon → /api/lead');
         }
-      } catch(e){ console.warn('[JCF] sendBeacon Error:', e); }
+      } catch(e){ console.warn('[JCF] sendBeacon error:', e); }
 
-      // Fallback wenn sendBeacon nicht unterstützt oder fehlgeschlagen
-      if (!beaconOk) {
-        fetch(WEBHOOK_URL, {
+      // (2) Fetch-Fallback wenn sendBeacon nicht verfügbar/fehlgeschlagen
+      if (!sent) {
+        fetch(LEAD_ENDPOINT, {
           method: 'POST',
-          headers: { 'Content-Type': 'text/plain' },
+          headers: { 'Content-Type': 'application/json' },
           body: payloadStr,
-          keepalive: true,
-          mode: 'no-cors'
-        }).then(function(){ console.log('[JCF] Webhook gesendet via fetch'); })
-          .catch(function(err){ console.warn('[JCF] Webhook failed:', err); });
+          keepalive: true
+        }).then(function(res){
+          if (res.ok) { sent = true; console.log('[JCF] Lead via fetch → /api/lead'); }
+          else        { throw new Error('HTTP ' + res.status); }
+        }).catch(function(err){
+          console.warn('[JCF] /api/lead failed, queueing for retry:', err);
+          // (3) In localStorage-Queue für späteren Retry
+          try {
+            var queue = JSON.parse(localStorage.getItem('jcf_lead_queue') || '[]');
+            queue.push({ payload: payload, queuedAt: new Date().toISOString() });
+            localStorage.setItem('jcf_lead_queue', JSON.stringify(queue));
+            console.log('[JCF] Lead in Retry-Queue (Versuch beim nächsten Page-Load)');
+          } catch(_){}
+        });
       }
 
-      // GTM DataLayer: Lead-Conversion-Event feuern
-      // Hier triggert GTM die Meta-, Google-Ads- und LinkedIn-Conversions
+      // GTM DataLayer: Lead-Conversion-Event feuern (immer, unabhängig von Webhook-Status)
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: 'form_submitted',
@@ -1093,7 +1141,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         utm_campaign:payload.utmCampaign|| ''
       });
 
-      // Weiterleiten — 400ms damit Beacon + GTM-Pixel garantiert durch sind
+      // Weiterleiten — 400ms damit Beacon + GTM-Pixel durch sind
       if (okEl) okEl.style.display = 'block';
       setTimeout(function(){ window.location.href = REDIRECT_URL; }, 400);
     });
