@@ -9,7 +9,7 @@
  * Deploy-Pfad im Repo: /api/lead.js  (bzw. /linkedin/api/lead.js falls Subfolder-Root)
  */
 
-const ZAPIER_WEBHOOK = 'https://hooks.zapier.com/hooks/catch/25556690/4yeuik2/';
+const ZAPIER_WEBHOOK = 'https://hooks.zapier.com/hooks/catch/25556690/433ypm4/';
 const MAX_ATTEMPTS = 3;
 
 export default async function handler(req, res) {
